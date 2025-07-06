@@ -3,7 +3,9 @@
     padding: 0;
     box-sizing: border-box;
 }
-
+.kbl{
+    background: #000;
+}
 body {
     font-family: 'Poppins', sans-serif;
     background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 100%);
