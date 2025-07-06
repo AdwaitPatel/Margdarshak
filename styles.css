@@ -1,3 +1,16 @@
+:root {
+    --primary-bg: #0f0f23;
+    --secondary-bg: #1a1a2e;
+    --accent-bg: #16213e;
+    --primary-text: #e0e6ed;
+    --secondary-text: #b0bec5;
+    --highlight: #64b5f6;
+    --highlight-alt: #42a5f5;
+    --border-light: rgba(255, 255, 255, 0.1);
+    --border-medium: rgba(255, 255, 255, 0.3);
+    --card-bg: rgba(255, 255, 255, 0.05);
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -6,8 +19,8 @@
 
 body {
     font-family: 'Poppins', sans-serif;
-    background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 100%);
-    color: #e0e6ed;
+    background: linear-gradient(135deg, var(--primary-bg) 0%, var(--secondary-bg) 100%);
+    color: var(--primary-text);
     line-height: 1.6;
     overflow-x: hidden;
 }
@@ -27,7 +40,7 @@ body {
     width: 100%;
     top: 0;
     z-index: 1000;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    border-bottom: 1px solid var(--border-light);
 }
 
 .nav-content {
@@ -39,9 +52,9 @@ body {
 .logo {
     font-size: 1.8rem;
     font-weight: 700;
-    color: #64b5f6;
+    color: var(--highlight);
     text-decoration: none;
-    background: linear-gradient(45deg, #64b5f6, #42a5f5);
+    background: linear-gradient(45deg, var(--highlight), var(--highlight-alt));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -54,7 +67,7 @@ body {
 }
 
 .nav-links a {
-    color: #e0e6ed;
+    color: var(--primary-text);
     text-decoration: none;
     font-weight: 500;
     transition: all 0.3s ease;
@@ -62,7 +75,7 @@ body {
 }
 
 .nav-links a:hover {
-    color: #64b5f6;
+    color: var(--highlight);
     transform: translateY(-2px);
 }
 
@@ -73,7 +86,7 @@ body {
     left: 0;
     width: 0;
     height: 2px;
-    background: linear-gradient(90deg, #64b5f6, #42a5f5);
+    background: linear-gradient(90deg, var(--highlight), var(--highlight-alt));
     transition: width 0.3s ease;
 }
 
@@ -87,7 +100,7 @@ body {
     min-height: 100vh;
     display: flex;
     align-items: center;
-    background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%);
+    background: linear-gradient(135deg, var(--primary-bg) 0%, var(--secondary-bg) 50%, var(--accent-bg) 100%);
     position: relative;
     overflow: hidden;
 }
@@ -116,7 +129,7 @@ body {
     font-size: 3.5rem;
     font-weight: 700;
     margin-bottom: 1.5rem;
-    background: linear-gradient(45deg, #ffffff, #64b5f6);
+    background: linear-gradient(45deg, #ffffff, var(--highlight));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -126,14 +139,14 @@ body {
 .hero-text p {
     font-size: 1.2rem;
     margin-bottom: 2rem;
-    color: #b0bec5;
+    color: var(--secondary-text);
     max-width: 500px;
 }
 
 .cta-button {
     display: inline-block;
     padding: 1rem 2.5rem;
-    background: linear-gradient(45deg, #64b5f6, #42a5f5);
+    background: linear-gradient(45deg, var(--highlight), var(--highlight-alt));
     color: white;
     text-decoration: none;
     border-radius: 50px;
@@ -154,15 +167,15 @@ body {
 }
 
 .hero-image-placeholder {
-    width: 400px;
-    height: 300px;
-    background: url('https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80') center/cover;
+    width: 600px;
+    height: 400px;
+    background: url('https://plus.unsplash.com/premium_photo-1733353256078-54e117018245?q=80&w=2338&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D') center/cover;
     border-radius: 20px;
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 1.2rem;
-    color: #64b5f6;
+    color: var(--highlight);
     border: 2px solid rgba(100, 181, 246, 0.2);
     backdrop-filter: blur(10px);
     position: relative;
@@ -202,12 +215,12 @@ body {
 }
 
 .category-card {
-    background: rgba(255, 255, 255, 0.05);
+    background: var(--card-bg);
     border-radius: 20px;
     padding: 2rem;
     text-align: center;
     transition: all 0.3s ease;
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: 1px solid var(--border-light);
     backdrop-filter: blur(10px);
     position: relative;
     overflow: hidden;
@@ -255,15 +268,15 @@ body {
 .category-card h3 {
     font-size: 1.5rem;
     margin-bottom: 1rem;
-    color: #64b5f6;
+    color: var(--highlight);
 }
 
 .explore-btn {
     display: inline-block;
     padding: 0.8rem 2rem;
     background: transparent;
-    border: 2px solid #64b5f6;
-    color: #64b5f6;
+    border: 2px solid var(--highlight);
+    color: var(--highlight);
     text-decoration: none;
     border-radius: 25px;
     font-weight: 500;
@@ -272,7 +285,7 @@ body {
 }
 
 .explore-btn:hover {
-    background: #64b5f6;
+    background: var(--highlight);
     color: white;
     transform: translateY(-2px);
 }
@@ -280,7 +293,7 @@ body {
 /* Mentorship Section */
 .mentorship {
     padding: 80px 0;
-    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    background: linear-gradient(135deg, var(--secondary-bg) 0%, var(--accent-bg) 100%);
 }
 
 .mentorship-content {
@@ -291,12 +304,12 @@ body {
 }
 
 .mentor-card {
-    background: rgba(255, 255, 255, 0.05);
+    background: var(--card-bg);
     border-radius: 20px;
     padding: 2rem;
     text-align: center;
     transition: all 0.3s ease;
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: 1px solid var(--border-light);
 }
 
 .mentor-card:hover {
@@ -307,7 +320,7 @@ body {
 .mentor-picture {
     width: 120px;
     height: 120px;
-    background: linear-gradient(45deg, #64b5f6, #42a5f5);
+    background: linear-gradient(45deg, var(--highlight), var(--highlight-alt));
     border-radius: 50%;
     margin: 0 auto 1rem;
     display: flex;
@@ -368,12 +381,12 @@ body {
 }
 
 .fact-card {
-    background: rgba(255, 255, 255, 0.05);
+    background: var(--card-bg);
     border-radius: 20px;
     padding: 2rem;
     text-align: center;
     transition: all 0.3s ease;
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: 1px solid var(--border-light);
 }
 
 .fact-card:hover {
@@ -384,7 +397,7 @@ body {
 .fact-icon {
     width: 80px;
     height: 80px;
-    /* background: linear-gradient(45deg, #64b5f6, #42a5f5); */
+    /* background: linear-gradient(45deg, var(--highlight), var(--highlight-alt)); */
     border-radius: 50%;
     margin: 0 auto 1rem;
     display: flex;
@@ -432,17 +445,17 @@ body {
 }
 
 .faq-item {
-    background: rgba(255, 255, 255, 0.05);
+    background: var(--card-bg);
     border-radius: 15px;
     margin-bottom: 1rem;
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: 1px solid var(--border-light);
     overflow: hidden;
 }
 
 .faq-question {
     padding: 1.5rem;
     font-weight: 600;
-    color: #64b5f6;
+    color: var(--highlight);
     cursor: pointer;
     transition: all 0.3s ease;
     position: relative;
@@ -471,7 +484,7 @@ body {
 
 .faq-answer {
     padding: 0 1.5rem 1.5rem;
-    color: #b0bec5;
+    color: var(--secondary-text);
     line-height: 1.6;
 }
 
@@ -489,10 +502,10 @@ body {
 
 Footer
 .footer {
-    background: #0f0f23;
+    background: var(--primary-bg);
     padding: 40px 0;
     text-align: center;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    border-top: 1px solid var(--border-light);
 }
 
 .footer-links {
@@ -503,13 +516,13 @@ Footer
 }
 
 .footer-links a {
-    color: #b0bec5;
+    color: var(--secondary-text);
     text-decoration: none;
     transition: color 0.3s ease;
 }
 
 .footer-links a:hover {
-    color: #64b5f6;
+    color: var(--highlight);
 }
 
 .copyright {
@@ -567,11 +580,11 @@ Footer
 }
 
 footer {
-    background-color: #0f0f23;
+    background-color: var(--primary-bg);
     height: auto;
     margin: 20px;
     border-radius: 20px;
-    border: 5px solid rgba(255, 255, 255, 0.3);
+    border: 5px solid var(--border-medium);
     padding: 20px;
 }
 
@@ -602,7 +615,7 @@ footer {
 .socialBtn {
     margin-top: 10px;
     padding: 10px 20px;
-    background-color: #64b5f6;
+    background-color: var(--highlight);
     border: none;
     color: white;
     font-weight: bold;
@@ -635,7 +648,7 @@ footer {
 
 
 .footerCopyright {
-    background: linear-gradient(45deg, #64b5f6, #42a5f5);
+    background: linear-gradient(45deg, var(--highlight), var(--highlight-alt));
     padding: 10px;
     text-align: center;
     font-family: 'Poppins', sans-serif;
