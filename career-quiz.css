@@ -1,3 +1,16 @@
+:root {
+    --primary-bg: #0f0f23;
+    --secondary-bg: #1a1a2e;
+    --accent-bg: #16213e;
+    --primary-text: #e0e6ed;
+    --secondary-text: #b0bec5;
+    --highlight: #64b5f6;
+    --highlight-alt: #42a5f5;
+    --border-light: rgba(255, 255, 255, 0.1);
+    --border-medium: rgba(255, 255, 255, 0.3);
+    --card-bg: rgba(255, 255, 255, 0.05);
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -6,8 +19,8 @@
 
 body {
     font-family: 'Poppins', sans-serif;
-    background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 100%);
-    color: #e0e6ed;
+    background: linear-gradient(135deg, var(--primary-bg) 0%, var(--secondary-bg) 100%);
+    color: var(--primary-text);
     line-height: 1.6;
     min-height: 100vh;
     overflow-x: hidden;
@@ -28,7 +41,7 @@ body {
     width: 100%;
     top: 0;
     z-index: 1000;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    border-bottom: 1px solid var(--border-light);
 }
 
 .nav-content {
@@ -40,9 +53,9 @@ body {
 .logo {
     font-size: 1.8rem;
     font-weight: 700;
-    color: #64b5f6;
+    color: var(--highlight);
     text-decoration: none;
-    background: linear-gradient(45deg, #64b5f6, #42a5f5);
+    background: linear-gradient(45deg, var(--highlight), var(--highlight-alt));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -55,7 +68,7 @@ body {
 }
 
 .nav-links a {
-    color: #e0e6ed;
+    color: var(--primary-text);
     text-decoration: none;
     font-weight: 500;
     transition: all 0.3s ease;
@@ -63,7 +76,7 @@ body {
 }
 
 .nav-links a:hover {
-    color: #64b5f6;
+    color: var(--highlight);
     transform: translateY(-2px);
 }
 
@@ -74,7 +87,7 @@ body {
     left: 0;
     width: 0;
     height: 2px;
-    background: linear-gradient(90deg, #64b5f6, #42a5f5);
+    background: linear-gradient(90deg, var(--highlight), var(--highlight-alt));
     transition: width 0.3s ease;
 }
 
@@ -89,7 +102,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%);
+    background: linear-gradient(135deg, var(--primary-bg) 0%, var(--secondary-bg) 50%, var(--accent-bg) 100%);
     position: relative;
 }
 
@@ -116,7 +129,7 @@ body {
     font-size: 2.5rem;
     font-weight: 700;
     margin-bottom: 3rem;
-    background: linear-gradient(45deg, #ffffff, #64b5f6);
+    background: linear-gradient(45deg, #ffffff, var(--highlight));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -124,11 +137,11 @@ body {
 }
 
 .questionnaire-box {
-    background: rgba(255, 255, 255, 0.05);
+    background: var(--card-bg);
     border-radius: 25px;
     padding: 3rem;
     margin-bottom: 2rem;
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: 1px solid var(--border-light);
     backdrop-filter: blur(15px);
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
     transition: all 0.3s ease;
@@ -146,7 +159,7 @@ body {
 
 .questions-placeholder {
     text-align: center;
-    color: #b0bec5;
+    color: var(--secondary-text);
     font-size: 1.1rem;
     line-height: 1.8;
 }
@@ -156,11 +169,11 @@ body {
     border-radius: 15px;
     padding: 2rem;
     margin: 1.5rem 0;
-    border-left: 4px solid #64b5f6;
+    border-left: 4px solid var(--highlight);
 }
 
 .question-example h3 {
-    color: #64b5f6;
+    color: var(--highlight);
     margin-bottom: 1rem;
     font-size: 1.3rem;
 }
@@ -172,7 +185,7 @@ body {
 
 .options-list li {
     padding: 0.8rem 0;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    border-bottom: 1px solid var(--border-light);
     transition: all 0.3s ease;
     cursor: pointer;
     position: relative;
@@ -180,7 +193,7 @@ body {
 }
 
 .options-list li:hover {
-    color: #64b5f6;
+    color: var(--highlight);
     padding-left: 2.5rem;
 }
 
@@ -188,7 +201,7 @@ body {
     content: '○';
     position: absolute;
     left: 0;
-    color: #64b5f6;
+    color: var(--highlight);
     font-size: 1.2rem;
 }
 
@@ -199,7 +212,7 @@ body {
 .cta-button {
     display: inline-block;
     padding: 1.2rem 3rem;
-    background: linear-gradient(45deg, #64b5f6, #42a5f5);
+    background: linear-gradient(45deg, var(--highlight), var(--highlight-alt));
     color: white;
     text-decoration: none;
     border-radius: 50px;
@@ -231,7 +244,7 @@ body {
     left: 50%;
     transform: translateX(-50%);
     background: rgba(0, 0, 0, 0.9);
-    color: #64b5f6;
+    color: var(--highlight);
     padding: 0.8rem 1.2rem;
     border-radius: 10px;
     font-size: 0.9rem;
@@ -240,7 +253,7 @@ body {
     visibility: hidden;
     transition: all 0.3s ease;
     z-index: 1000;
-    border: 1px solid rgba(100, 181, 246, 0.3);
+    border: 1px solid var(--border-medium);
 }
 
 .login-redirect::before {
@@ -270,7 +283,7 @@ body {
     width: 100%;
     max-width: 600px;
     margin: 2rem auto;
-    background: rgba(255, 255, 255, 0.1);
+    background: var(--border-light);
     border-radius: 25px;
     padding: 4px;
     position: relative;
@@ -279,7 +292,7 @@ body {
 
 .progress-bar {
     height: 12px;
-    background: linear-gradient(90deg, #64b5f6, #42a5f5);
+    background: linear-gradient(90deg, var(--highlight), var(--highlight-alt));
     border-radius: 20px;
     width: 30%;
     transition: width 0.3s ease;
@@ -311,7 +324,7 @@ body {
 .progress-text {
     text-align: center;
     margin-top: 1rem;
-    color: #b0bec5;
+    color: var(--secondary-text);
     font-size: 0.9rem;
 }
 
@@ -326,11 +339,11 @@ body {
 }
 
 footer {
-    background-color: #0f0f23;
+    background-color: var(--primary-bg);
     height: auto;
     margin: 20px;
     border-radius: 20px;
-    border: 5px solid rgba(255, 255, 255, 0.3);
+    border: 5px solid var(--border-medium);
     padding: 20px;
 }
 
@@ -361,7 +374,7 @@ footer {
 .socialBtn {
     margin-top: 10px;
     padding: 10px 20px;
-    background-color: #64b5f6;
+    background-color: var(--highlight);
     border: none;
     color: white;
     font-weight: bold;
@@ -394,7 +407,7 @@ footer {
 
 
 .footerCopyright {
-    background: linear-gradient(45deg, #64b5f6, #42a5f5);
+    background: linear-gradient(45deg, var(--highlight), var(--highlight-alt));
     padding: 10px;
     text-align: center;
     font-family: 'Poppins', sans-serif;
