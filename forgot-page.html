@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Forgot Password - Margdarshak</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --primary-bg: #0f0f23;
+      --secondary-bg: #1a1a2e;
+      --accent-bg: #16213e;
+      --primary-text: #e0e6ed;
+      --secondary-text: #b0bec5;
+      --highlight: #64b5f6;
+      --highlight-alt: #42a5f5;
+      --border-light: rgba(255, 255, 255, 0.1);
+      --border-medium: rgba(255, 255, 255, 0.3);
+      --card-bg: rgba(255, 255, 255, 0.05);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    html, body {
+      height: 100%;
+    }
+
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--primary-bg);
+      color: var(--primary-text);
+      padding: 1rem;
+    }
+
+    .card {
+      width: 100%;
+      max-width: 550px;
+      background: var(--secondary-bg);
+      border: 1px solid var(--border-light);
+      border-radius: 1.2rem;
+      padding: 3.5rem 3rem;
+      box-shadow: 0 8px 30px rgba(0,0,0,.5);
+    }
+
+    .card h2 {
+      text-align: center;
+      margin-bottom: 2.5rem;
+      font-weight: 600;
+      font-size: 2rem;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 1.7rem;
+    }
+
+    input[type=email] {
+      width: 100%;
+      padding: 1.2rem 1.4rem;
+      background: var(--card-bg);
+      border: 1px solid var(--border-light);
+      border-radius: 0.7rem;
+      color: var(--primary-text);
+      font-size: 1.1rem;
+    }
+
+    input::placeholder {
+      color: var(--secondary-text);
+      font-size: 1rem;
+    }
+
+    input:focus {
+      outline: none;
+      border: 1px solid var(--highlight);
+      box-shadow: 0 0 0 5px rgba(100, 181, 246, 0.18);
+    }
+
+    .btn-primary {
+      background: var(--highlight);
+      border: none;
+      padding: 1.1rem;
+      border-radius: 0.7rem;
+      color: #fff;
+      font-weight: 600;
+      font-size: 1.05rem;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .btn-primary:hover {
+      background: var(--highlight-alt);
+    }
+
+    .confirmation {
+      margin-top: 2rem;
+      background: var(--card-bg);
+      border: 1px solid var(--border-medium);
+      border-radius: 0.7rem;
+      padding: 1.3rem 1.5rem;
+      color: var(--highlight);
+      display: none;
+      font-size: 1rem;
+      text-align: center;
+      font-weight: 500;
+    }
+
+    .links {
+      margin-top: 2rem;
+      text-align: center;
+      font-size: 1rem;
+      color: var(--secondary-text);
+    }
+
+    .links a {
+      color: var(--highlight);
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .links a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h2>Forgot Password</h2>
+
+    <form onsubmit="showConfirmation(event)">
+      <input type="email" id="email" name="email" placeholder="Enter your registered email" required />
+      <button class="btn-primary" type="submit">Send Reset Link</button>
+    </form>
+
+    <div class="confirmation" id="confirmationBox">
+      We’ve sent you a verification mail. Click on the link to reset your password.
+    </div>
+
+    <div class="links">
+      Back to <a href="login.html">Login</a>
+    </div>
+  </div>
+
+  <script>
+    function showConfirmation(event) {
+      event.preventDefault();
+      const email = document.getElementById("email").value;
+      if (email.trim() !== "") {
+        document.getElementById("confirmationBox").style.display = "block";
+      }
+    }
+  </script>
+</body>
+</html>
