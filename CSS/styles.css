@@ -237,6 +237,7 @@ body {
     background-position: center;
     opacity: 0.1;
     transition: opacity 0.3s ease;
+    pointer-events: none;
 }
 
 .category-card:nth-child(1)::before {
@@ -288,6 +289,7 @@ body {
     background: var(--highlight);
     color: white;
     transform: translateY(-2px);
+    cursor: pointer;
 }
 
 /* Mentorship Section */
@@ -346,10 +348,6 @@ body {
 .mentor-card:nth-child(3) .mentor-picture {
     background-image: url('https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80');
 }
-
-/* .mentor-card:nth-child(4) .mentor-picture {
-    background-image: url('https://images.unsplash.com/photo-1559839734-2b71ea197ec2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80');
-} */
 
 .mentor-picture::after {
     content: '';
@@ -500,37 +498,10 @@ body {
     content: '-';
 }
 
-Footer
-.footer {
-    background: var(--primary-bg);
-    padding: 40px 0;
-    text-align: center;
-    border-top: 1px solid var(--border-light);
-}
-
-.footer-links {
-    display: flex;
-    justify-content: center;
-    gap: 2rem;
-    margin-bottom: 2rem;
-}
-
-.footer-links a {
-    color: var(--secondary-text);
-    text-decoration: none;
-    transition: color 0.3s ease;
-}
-
-.footer-links a:hover {
-    color: var(--highlight);
-}
-
-.copyright {
-    color: #78909c;
-    font-size: 0.9rem;
-}
 
 /* Responsive Design */
+
+
 @media (max-width: 768px) {
     .nav-links {
         display: none;

@@ -5,28 +5,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Margdarshak - Contact Us</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="contact.css">
+    <link rel="stylesheet" href="../CSS/contact.css">
 </head>
 <body>
 
-    <header class="header">
-        <div class="container header-container">
-            <div class="logo">Margdarshak</div>
-            <nav class="nav">
-                <a href="index.html" class="nav-link">Home</a>
-                <a href="#" class="nav-link">Career path</a>
-                <a href="#" class="nav-link active">Contact</a>
-                <a href="#" class="nav-link">Login</a>
-                <a href="#" class="nav-link">SignUp</a>
-            </nav>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-content">
+                <a href="./index.html" class="logo">Margdarshak</a>
+                <ul class="nav-links">
+                    <li><a href="./index.html">Home</a></li>
+                    <li><a href="./career-quiz.html">Career Path</a></li>
+                    <li><a href="./contact.html">Contact</a></li>
+                    <li><a href="./login.html">Login</a></li>
+                    <li><a href="./signup.html">SignUp</a></li>
+                </ul>
+            </div>
         </div>
-    </header>
+    </nav>
 
     <main class="main-content">
         <section class="hero-section">
             <div class="container hero-container">
-                <p class="hero-subtitle">Members</p>
-                <h1 class="hero-title">We've been waiting for you.</h1>
+                <h1 class="hero-title">We've been waiting for you</h1>
                 <p class="hero-description">
                     We want to hear from you. Let us know how we can help.
                 </p>
@@ -43,9 +45,6 @@
                             </div>
                             <div>
                                 <textarea placeholder="Your message here" rows="4" class="input-field textarea-field"></textarea>
-                            </div>
-                            <div>
-                                <input type="tel" placeholder="Phone number" class="input-field" />
                             </div>
                             <button type="submit" class="submit-button">Submit</button>
                         </form>
@@ -109,10 +108,38 @@
         </section>
     </main>
 
-    <footer class="footer">
-        <div class="container footer-container">
-            &copy; 2025 Margdarshak. All rights reserved.
+    <!-- Footer -->
+    <footer>
+      <div class="footerSection">
+        <div class="leftFooter">
+          <a href="./index.html" class="logo">Margdarshak</a>
+          <p>
+            From career guidance to personalized mentorship,<br>we help you discover and shape your<br>ideal career path in one place.
+          </p>
+          <!-- <div class="socialLogos">
+            <a href="#"><img src="images/twitter.png" alt="Twitter"></a>
+            <a href="#"><img src="images/linkedin-logo.png" alt="LinkedIn"></a>
+            <a href="#"><img src="images/instagram.png" alt="Instagram"></a>
+            <a href="#"><img src="images/facebook.png" alt="Facebook"></a>
+          </div> -->
+          <!-- <a href="#"><button class="socialBtn"><span class="material-symbols-outlined">
+            // implement it like a up arrow logo on each page
+              </span>BACK TO TOP</button></a> -->
         </div>
+        <div class="rightFooter">
+          <ul id="footerLinks">
+            <li><a href="./index.html">Home</a></li>
+            <li><a href="./career-quiz.html">Career Path</a></li>
+            <li><a href="#">Mentorship</a></li>
+            <li><a href="#">FAQs</a></li>
+            <li><a href="./contact.html">Contact</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footerCopyright">
+        &copy; 2025 Margdarshak. All rights reserved.
+      </div>
     </footer>
 
 </body>
