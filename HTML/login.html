@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login to Margdarshak</title>
+
+    <link rel="stylesheet" href="../CSS/login.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+    <div class="card">
+        <h2>Login to Margdarshak</h2>
+
+        <button class="btn-google">
+            <img src="https://www.svgrepo.com/show/475656/google-color.svg" alt="Google icon" width="20" />
+            Continue with Google
+        </button>
+
+        <div class="divider">or</div>
+
+        <form action="/login" method="POST">
+            <input type="email" name="email" placeholder="Email" required />
+            <input type="password" name="password" placeholder="Password" required />
+
+            <div class="checkbox-row">
+                <label>
+                    <input type="checkbox" name="remember" />
+                    Remember me
+                </label>
+                <a href="./forgot-password.html">Forgot Password?</a>
+            </div>
+
+            <button class="btn-primary" type="submit">Login</button>
+        </form>
+
+        <div class="links">
+            Don't have an account? <a href="signup.html">Sign Up</a>
+        </div>
+    </div>
+</body>
+
+</html>
