@@ -16,13 +16,20 @@
         <div class="container">
             <div class="nav-content">
                 <a href="./index.html" class="logo">Margdarshak</a>
-                <ul class="nav-links">
+
+                <ul class="nav-links" id="navLinks">
                     <li><a href="./index.html">Home</a></li>
                     <li><a href="./career-quiz.html">Career Path</a></li>
                     <li><a href="./contact.html">Contact</a></li>
                     <li><a href="./login.html">Login</a></li>
                     <li><a href="./signup.html">SignUp</a></li>
                 </ul>
+
+                <div class="hamburger" id="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
             </div>
         </div>
     </nav>
@@ -157,47 +164,76 @@
 
     <!-- Footer -->
     <footer>
-      <div class="footerSection">
-        <div class="leftFooter">
-          <a href="./index.html" class="logo">Margdarshak</a>
-          <p>
-            From career guidance to personalized mentorship,<br>we help you discover and shape your<br>ideal career path in one place.
-          </p>
-          <!-- <div class="socialLogos">
+        <div class="footerSection">
+            <div class="leftFooter">
+                <a href="./index.html" class="logo">Margdarshak</a>
+                <p>
+                    From career guidance to personalized mentorship,<br>we help you discover and shape your<br>ideal
+                    career path in one place.
+                </p>
+                <!-- <div class="socialLogos">
             <a href="#"><img src="images/twitter.png" alt="Twitter"></a>
             <a href="#"><img src="images/linkedin-logo.png" alt="LinkedIn"></a>
             <a href="#"><img src="images/instagram.png" alt="Instagram"></a>
             <a href="#"><img src="images/facebook.png" alt="Facebook"></a>
           </div> -->
-          <!-- <a href="#"><button class="socialBtn"><span class="material-symbols-outlined">
+                <!-- <a href="#"><button class="socialBtn"><span class="material-symbols-outlined">
             // implement it like a up arrow logo on each page
               </span>BACK TO TOP</button></a> -->
+            </div>
+            <div class="rightFooter">
+                <ul id="footerLinks">
+                    <li><a href="./index.html">Home</a></li>
+                    <li><a href="./career-quiz.html">Career Path</a></li>
+                    <li><a href="#">Mentorship</a></li>
+                    <li><a href="#">FAQs</a></li>
+                    <li><a href="./contact.html">Contact</a></li>
+                </ul>
+            </div>
         </div>
-        <div class="rightFooter">
-          <ul id="footerLinks">
-            <li><a href="./index.html">Home</a></li>
-            <li><a href="./career-quiz.html">Career Path</a></li>
-            <li><a href="#">Mentorship</a></li>
-            <li><a href="#">FAQs</a></li>
-            <li><a href="./contact.html">Contact</a></li>
-          </ul>
-        </div>
-      </div>
 
-      <div class="footerCopyright">
-        &copy; 2025 Margdarshak. All rights reserved.
-      </div>
+        <div class="footerCopyright">
+            &copy; 2025 Margdarshak. All rights reserved.
+        </div>
     </footer>
 
+    <!-- FAQ Script -->
     <script>
         const faqItems = document.querySelectorAll('.faq-item');
-        
+
         faqItems.forEach(item => {
             const question = item.querySelector('.faq-question');
-            
+
             question.addEventListener('click', () => {
                 item.classList.toggle('active'); // Toggle open/close
             });
+        });
+    </script>
+
+    <!-- Navbar Script -->
+    <script>
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.getElementById('navLinks');
+
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navLinks.classList.toggle('active');
+        });
+
+        // Close menu when clicking on a link
+        navLinks.addEventListener('click', (e) => {
+            if (e.target.tagName === 'A') {
+                hamburger.classList.remove('active');
+                navLinks.classList.remove('active');
+            }
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!hamburger.contains(e.target) && !navLinks.contains(e.target)) {
+                hamburger.classList.remove('active');
+                navLinks.classList.remove('active');
+            }
         });
     </script>
 </body>
