@@ -6,7 +6,9 @@ const CareerQuizPage = () => {
   return (
     <>
       <Navbar />
-      <CareerQuiz />
+      <div className="mt-15">
+        <CareerQuiz />
+      </div>
       <Footer />
     </>
   );
