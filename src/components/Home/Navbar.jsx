@@ -92,6 +92,15 @@ const Navbar = () => {
             </li>
             <li>
               <Link
+                to="/Mentors"
+                className="text-slate-100 hover:text-blue-400 font-medium transition-all duration-300 hover:-translate-y-0.5 relative group"
+              >
+                Mentors
+                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-400 to-blue-300 transition-all duration-300 group-hover:w-full"></span>
+              </Link>
+            </li>
+            <li>
+              <Link
                 to="/login"
                 className="text-slate-100 hover:text-blue-400 font-medium transition-all duration-300 hover:-translate-y-0.5 relative group"
               >

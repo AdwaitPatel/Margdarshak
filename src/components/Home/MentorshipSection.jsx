@@ -1,11 +1,12 @@
 import React from 'react';
-
+import { Link } from "react-router-dom";
 const MentorshipSection = () => {
   const mentors = [
     {
       name: "Dr. Rajesh Singh",
       description: "Career Counselor with 15+ years of experience in guiding students towards their ideal career paths. Specializes in engineering and technology careers.",
-      image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
+      image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
+      id:"1"
     },
     {
       name: "Dr. Priya Sharma",
@@ -34,17 +35,21 @@ const MentorshipSection = () => {
             >
               {/* Mentor Image */}
               <div className="relative mb-6">
-                <div className="w-32 h-32 mx-auto rounded-full overflow-hidden border-4 border-gradient-to-r from-blue-400 to-blue-600 p-1">
-                  <img 
+                  
+                  <div className="w-32 h-32 mx-auto rounded-full overflow-hidden border-4 border-gradient-to-r from-blue-400 to-blue-600 p-1">
+                   <img 
                     src={mentor.image} 
                     alt={mentor.name}
                     className="w-full h-full object-cover rounded-full"
+                    
                   />
+                
                 </div>
+                
                 {/* Gradient overlay on hover */}
                 <div className="absolute inset-0 w-32 h-32 mx-auto rounded-full bg-gradient-to-br from-blue-400/30 to-blue-600/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
               </div>
-              
+            
               {/* Mentor Details */}
               <h3 className="text-xl font-semibold mb-4 text-white group-hover:text-blue-400 transition-colors duration-300">
                 {mentor.name}

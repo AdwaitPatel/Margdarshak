@@ -9,7 +9,7 @@ import LoginPage from "./pages/Login";
 import ForgotPasswordPage from "./pages/ForgotPassword";
 import CareerDomainsPage from "./pages/CareerDomains";
 import ScrollToTop from "./components/ScrollToTop";
-
+import MentorsPage from './pages/Mentors';
 function App() {
   return (
     <Router>
@@ -21,6 +21,7 @@ function App() {
         <Route path="/signup" element={<SignupPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/forgot-password" element={<ForgotPasswordPage />} />
+        <Route path="/Mentors" element={<MentorsPage />} />
 
         {/* Explore pages */}
         <Route
