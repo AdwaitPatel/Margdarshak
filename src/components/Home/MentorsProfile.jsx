@@ -1,4 +1,3 @@
-// MentorProfile.js (or wherever you want to define this component)
 import React from 'react';
 
 const MentorProfile = ({ mentor, onBackToList }) => {

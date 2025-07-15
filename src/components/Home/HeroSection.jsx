@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import React from 'react';
 
 const HeroSection = () => {
@@ -22,12 +23,12 @@ const HeroSection = () => {
               Discover your strengths, explore career options, and get personalized guidance from expert 
               mentors to build a successful future.
             </p>
-            <a 
-              href="#" 
+            <Link 
+              to="/career-quiz"
               className="inline-block px-8 py-4 bg-gradient-to-r from-blue-500 to-blue-600 text-white font-semibold rounded-full hover:from-blue-600 hover:to-blue-700 transition-all duration-300 hover:-translate-y-1 shadow-lg hover:shadow-blue-500/25"
             >
               Find your career option
-            </a>
+            </Link>
           </div>
 
           {/* Hero Image */}
