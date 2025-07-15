@@ -145,6 +145,7 @@ const Navbar = () => {
                     : "group-hover:bg-blue-400"
                 }`}
               ></span>
+              
             </button>
           </div>
         </div>
@@ -252,6 +253,32 @@ const Navbar = () => {
             >
               <span className="flex items-center justify-between">
                 Contact
+                <svg
+                  className="w-4 h-4 opacity-50 group-hover:opacity-100 group-hover:translate-x-1 transition-all duration-200"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M9 5l7 7-7 7"
+                  />
+                </svg>
+              </span>
+            </Link>
+            <Link
+              to="/Mentors"
+              onClick={closeMenu}
+              className={`hover:bg-blue-400/10 text-lg font-medium transition-all duration-200 px-6 py-4 border-b border-white/5 relative group ${
+                location.pathname === "/contact"
+                  ? "text-blue-400"
+                  : "text-slate-100 hover:text-blue-400"
+              }`}
+            >
+              <span className="flex items-center justify-between">
+                Mentors
                 <svg
                   className="w-4 h-4 opacity-50 group-hover:opacity-100 group-hover:translate-x-1 transition-all duration-200"
                   fill="none"
