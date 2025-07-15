@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
-// import { FiSearch, FiArrowRight } from 'react-icons/fi'; // Importing icons - REMOVED due to module resolution error
-import { motion, AnimatePresence } from 'framer-motion'; // Importing Framer Motion for animations
-
-// Updated Mock Data for Mentors with direct image URLs
+import { motion, AnimatePresence } from 'framer-motion';
+import MentorsProfile from './Home/MentorsProfile';  
 const mentorsData = [
   {
     id: '1',
@@ -10,7 +8,7 @@ const mentorsData = [
     subject: 'Computer Science',
     experience: '15 years+',
     imageUrl: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
-    profileImageUrl: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80", // Using same image for profile
+    profileImageUrl: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
     price: 500,
     availableTimes: [
       'Monday: 10:00 AM - 12:00 PM',
@@ -64,26 +62,7 @@ const mentorsData = [
   },
 ];
 
-// Navbar Component
-const Navbar = ({ onHomeClick }) => {
-  return (
-    <nav className="bg-gray-900 text-white p-4 shadow-lg">
-      <div className="container mx-auto flex justify-between items-center">
-        <div className="text-2xl font-bold text-blue-400 cursor-pointer" onClick={onHomeClick}>Margdarshak</div>
-        <div className="flex space-x-6">
-          <a href="#" className="hover:text-blue-300 transition duration-300" onClick={onHomeClick}>Home</a>
-          <a href="#" className="hover:text-blue-300 transition duration-300">Career path</a>
-          <a href="#" className="hover:text-blue-300 transition duration-300">Contact</a>
-          <a href="#" className="hover:text-blue-300 transition duration-300">Mentors</a>
-          <a href="#" className="hover:text-blue-300 transition duration-300">Login</a>
-          <a href="#" className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition duration-300">SignUp</a>
-        </div>
-      </div>
-    </nav>
-  );
-};
-
-// Mentor Card Component (updated with Framer Motion and new image prop)
+// Mentor Card Component
 const MentorCard = ({ mentor, onViewProfile }) => {
   return (
     <motion.div
@@ -91,7 +70,7 @@ const MentorCard = ({ mentor, onViewProfile }) => {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
       whileHover={{ scale: 1.03 }}
-      className="rounded-lg overflow-hidden shadow-lg bg-gray-800"
+      className="rounded-lg overflow-hidden shadow-lg bg-gray-800" // Removed cursor-pointer and onClick from the whole card
     >
       <div className="p-6">
         <div className="flex items-center mb-4">
@@ -117,11 +96,12 @@ const MentorCard = ({ mentor, onViewProfile }) => {
             <span className="font-medium text-white">Experience:</span> {mentor.experience}
           </p>
           <div className="flex justify-between items-center mt-3">
+            {/* The "View Profile" button now exclusively triggers the profile view */}
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               className="py-2 px-4 rounded-lg font-medium bg-blue-600 text-white hover:bg-blue-700 transition-colors"
-              onClick={() => onViewProfile(mentor)}
+              onClick={() => onViewProfile(mentor)} // This is the primary click handler for opening profile
             >
               View Profile
             </motion.button>
@@ -129,7 +109,7 @@ const MentorCard = ({ mentor, onViewProfile }) => {
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
               className="w-10 h-10 rounded-full bg-blue-600 text-white flex items-center justify-center hover:bg-blue-700 transition-colors"
-              onClick={() => onViewProfile(mentor)}
+              onClick={() => onViewProfile(mentor)} // This button also triggers profile view
             >
               {/* FiArrowRight icon replaced with inline SVG */}
               <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -143,97 +123,14 @@ const MentorCard = ({ mentor, onViewProfile }) => {
   );
 };
 
-// Mentor Profile Component
-const MentorProfile = ({ mentor, onBackToList }) => {
-  if (!mentor) {
-    return (
-      <div className="flex justify-center items-center h-screen bg-gray-900 text-white">
-        <p>No mentor selected.</p>
-        <button
-            onClick={onBackToList}
-            className="ml-4 bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg transition duration-300 ease-in-out"
-          >
-            Back to List
-          </button>
-      </div>
-    );
-  }
 
-  return (
-    <div className="min-h-screen bg-gray-900 text-white py-10 px-4 sm:px-6 lg:px-8">
-      <div className="container mx-auto bg-gray-800 rounded-xl shadow-2xl p-8 md:p-12 max-w-4xl">
-        <button
-          onClick={onBackToList}
-          className="mb-6 flex items-center text-blue-400 hover:text-blue-300 transition duration-300"
-        >
-          <svg className="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-            <path fillRule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clipRule="evenodd"></path>
-          </svg>
-          Back to Mentors
-        </button>
-
-        <div className="flex flex-col md:flex-row items-center md:items-start space-y-8 md:space-y-0 md:space-x-12">
-          {/* Mentor Image Section */}
-          <div className="flex-shrink-0">
-            <img
-              src={mentor.profileImageUrl}
-              alt={mentor.name}
-              className="w-48 h-48 md:w-64 md:h-64 rounded-full object-cover border-8 border-blue-500 shadow-xl"
-              onError={(e) => { e.target.onerror = null; e.target.src = `https://placehold.co/200x200/6B7280/ffffff?text=${mentor.name.split(' ').map(n => n[0]).join('')}`; }}
-            />
-          </div>
-
-          {/* Mentor Details Section */}
-          <div className="flex-grow text-center md:text-left">
-            <h1 className="text-4xl font-extrabold text-white mb-2">{mentor.name}</h1>
-            <p className="text-blue-400 text-xl mb-4">{mentor.subject}</p>
-            <p className="text-gray-300 text-lg mb-4">
-              <span className="font-semibold">Experience:</span> {mentor.experience}
-            </p>
-            <p className="text-gray-200 text-md leading-relaxed mb-6">{mentor.bio}</p>
-
-            {/* <div className="bg-gray-700 rounded-lg p-4 mb-6 shadow-inner">
-              <p className="text-blue-300 text-lg font-semibold">One-on-One Advisory Fees:</p>
-              <p className="text-white text-2xl font-bold">{mentor.price} rupees</p>
-            </div> */}
-
-            <div className="bg-gray-700 rounded-lg p-4 mb-6 shadow-inner">
-              <p className="text-blue-300 text-lg font-semibold mb-2">Available Times:</p>
-              <ul className="list-disc list-inside text-gray-200 space-y-1">
-                {mentor.availableTimes.map((time, index) => (
-                  <li key={index}>{time}</li>
-                ))}
-              </ul>
-            </div>
-
-            <button
-              className="w-full md:w-auto bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-lg text-lg transition duration-300 ease-in-out transform hover:-translate-y-1 shadow-lg hover:shadow-xl"
-            >
-              Do a meeting with this mentor
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-};
-
-// Footer Component
-const Footer = () => {
-  return (
-    <footer className="bg-gray-900 text-gray-400 p-6 text-center shadow-inner mt-10">
-      <div className="container mx-auto">
-      </div>
-    </footer>
-  );
-};
 
 // Main App Component
 function App() {
   const [selectedMentor, setSelectedMentor] = useState(null);
   const [searchQuery, setSearchQuery] = useState('');
   const [isLoading, setIsLoading] = useState(true);
-  const [filteredMentors, setFilteredMentors] = useState(mentorsData); // Initialize with full data
+  const [filteredMentors, setFilteredMentors] = useState(mentorsData);
 
   useEffect(() => {
     // Simulate loading data
@@ -250,7 +147,7 @@ function App() {
       mentor.subject.toLowerCase().includes(searchQuery.toLowerCase())
     );
     setFilteredMentors(results);
-  }, [searchQuery, mentorsData]); // Depend on mentorsData to re-filter if it changes
+  }, [searchQuery, mentorsData]);
 
   const handleViewProfile = (mentor) => {
     setSelectedMentor(mentor);
@@ -262,11 +159,13 @@ function App() {
 
   return (
     <div className="min-h-screen bg-gray-900 font-sans">
-      <Navbar onHomeClick={handleBackToList} />
+     
 
       {selectedMentor ? (
-        <MentorProfile mentor={selectedMentor} onBackToList={handleBackToList} />
+        // Render MentorProfile component when a mentor is selected
+        <MentorsProfile mentor={selectedMentor} onBackToList={handleBackToList} />
       ) : (
+        // Render mentor list and search when no mentor is selected
         <main className="flex-1 p-6 md:p-8 max-w-6xl mx-auto w-full bg-gray-900 min-h-screen">
           <motion.div
             initial={{ opacity: 0, y: -20 }}
@@ -340,7 +239,7 @@ function App() {
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               <AnimatePresence>
-                {filteredMentors.map((mentor, index) => (
+                {filteredMentors.map((mentor) => (
                   <MentorCard key={mentor.id} mentor={mentor} onViewProfile={handleViewProfile} />
                 ))}
               </AnimatePresence>
@@ -349,7 +248,7 @@ function App() {
         </main>
       )}
 
-      <Footer />
+    
     </div>
   );
 }
