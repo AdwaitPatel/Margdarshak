@@ -6,7 +6,9 @@ const Mentors = () => {
   return (
     <>
       <Navbar />
-      <MentorsPage />
+      <div className="mt-15">
+        <MentorsPage />
+      </div>
       <Footer />
     </>
   );
