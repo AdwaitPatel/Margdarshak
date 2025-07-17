@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Margdarshak - Find Your Perfect Career Path</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" />
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="light-mode">
+    <!-- Header Section -->
+    <header>
+        <div class="container">
+            <div class="logo">
+                <h1><span class="orange">Marg</span><span class="purple">darshak</span></h1>
+            </div>
+            <nav>
+                <ul class="nav-links">
+                    <li class="dropdown highlighted-nav-item"> <!-- Added highlighted-nav-item class -->
+                        <a href="#" class="dropdown-btn"
+                            style="background-color: #7B2CBF; color: white; padding: 8px 16px; border-radius: 20px;">
+                            <i class="fas fa-book-open" style="margin-right: 8px;"></i> Course Core
+                            <i class="fas fa-chevron-down" style="margin-left: 8px;"></i>
+                        </a>
+                        <div class="dropdown-content">
+                            <a href="./10th_Core.html">10th Core</a>
+                            <a href="#">11th Core</a>
+                            <a href="#">12th Core</a>
+                        </div>
+                    </li>
+                    <li><a href="#" class="active">Home</a></li>
+                    <li><a href="#mentorship">Mentorship</a></li>
+                    <li><a href="#">Career Path</a></li>
+                </ul>
+                <div class="auth-buttons">
+                    <a href="#" class="btn btn-login" style="border-radius: 20px;">Login</a>
+                    <a href="#" class="btn btn-signup"style="border-radius: 20px;">Sign Up</a>
+                </div>
+                <div class="theme-toggle">
+                    <input type="checkbox" class="checkbox" id="checkbox">
+                    <label for="checkbox" class="checkbox-label">
+                        <i class="fas fa-moon"></i>
+                        <i class="fas fa-sun"></i>
+                        <span class="ball"></span>
+                    </label>
+                </div>
+                <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="animate-fade-in">Find Your Perfect Career Path</h1>
+                <p class="animate-fade-in">Discover your strengths, explore career options, and get personalized
+                    guidance from expert mentors to build a successful future.</p>
+                <a href="#success-stories" class="btn btn-primary animate-fade-in">View Success Stories</a>
+            </div>
+            <!-- Cinematic Slider -->
+            <div class="cinematic-slider animate-slide-in">
+                <div class="slider-track">
+                    <div class="slider-slide active">
+                        <img src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80"
+                            alt="Teacher interacting with students">
+                        <div class="slider-overlay">
+                            <h3>Personalized Career Guidance</h3>
+                            <p>Get tailored advice based on your skills, interests, and aspirations</p>
+                            <a href="#" class="btn btn-primary">Learn More</a>
+                        </div>
+                    </div>
+                    <div class="slider-slide">
+                        <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80"
+                            alt="Students in classroom">
+                        <div class="slider-overlay">
+                            <h3>Expert Mentorship</h3>
+                            <p>Connect with industry professionals who can guide your career journey</p>
+                            <a href="#" class="btn btn-primary">Find a Mentor</a>
+                        </div>
+                    </div>
+                    <div class="slider-slide">
+                        <img src="https://images.unsplash.com/photo-1577896851231-70ef18881754?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80"
+                            alt="Career counseling session">
+                        <div class="slider-overlay">
+                            <h3>Comprehensive Assessments</h3>
+                            <p>Discover your strengths and find careers that match your personality</p>
+                            <a href="#" class="btn btn-primary">Take Assessment</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="slider-indicators">
+                    <div class="slider-indicator active"></div>
+                    <div class="slider-indicator"></div>
+                    <div class="slider-indicator"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Image Slider Section -->
+    <!-- Success Stories Section HTML -->
+    <section id="success-stories" class="section">
+        <div class="container">
+            <h2 class="section-title">Success Stories</h2>
+            <div class="success-slider-container">
+                <div class="success-slider">
+                    <div class="success-slide">
+                        <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
+                            alt="Success Story 1">
+                        <div class="success-slide-content">
+                            <h2>Rahul's Journey</h2>
+                            <p>From confused student to successful software engineer</p>
+                        </div>
+                    </div>
+                    <div class="success-slide">
+                        <img src="https://images.unsplash.com/photo-1507537297725-24a1c029d3ca?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
+                            alt="Success Story 2">
+                        <div class="success-slide-content">
+                            <h2>Priya's Story</h2>
+                            <p>Found her passion in architecture after career counseling</p>
+                        </div>
+                    </div>
+                    <div class="success-slide">
+                        <img src="https://images.unsplash.com/photo-1531482615713-2afd69097998?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
+                            alt="Success Story 3">
+                        <div class="success-slide-content">
+                            <h2>Amit's Success</h2>
+                            <p>From average student to top medical college</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="success-slider-controls">
+                    <button class="success-prev-btn"><i class="fas fa-chevron-left"></i></button>
+                    <div class="success-slider-dots">
+                        <div class="success-dot"></div>
+                        <div class="success-dot"></div>
+                        <div class="success-dot"></div>
+                    </div>
+                    <button class="success-next-btn"><i class="fas fa-chevron-right"></i></button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mentorship Section -->
+    <section class="mentorship" id="mentorship">
+        <div class="container">
+            <h2 class="section-title">Get 1:1 MargDarshan</h2>
+            <div class="mentors-container">
+                <div class="mentor-card">
+                    <div class="mentor-image">
+                        <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80"
+                            alt="Dr. Rajesh Singh">
+                    </div>
+                    <h3>Dr. Rajesh Singh</h3>
+                    <p>Specializes in engineering & technology</p>
+                    <p>15+ years experience in career counseling</p>
+                    <a href="#" class="btn btn-secondary">Connect</a>
+                </div>
+                <div class="mentor-card">
+                    <div class="mentor-image">
+                        <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=688&q=80"
+                            alt="Dr. Priya Sharma">
+                    </div>
+                    <h3>Dr. Priya Sharma</h3>
+                    <p>Medical expert & life coach</p>
+                    <p>Helps students explore healthcare & medical fields</p>
+                    <a href="#" class="btn btn-secondary">Connect</a>
+                </div>
+                <div class="mentor-card">
+                    <div class="mentor-image">
+                        <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80"
+                            alt="Prof. Amit Kumar">
+                    </div>
+                    <h3>Prof. Amit Kumar</h3>
+                    <p>Business, finance & entrepreneurship mentor</p>
+                    <p>Extensive industry experience</p>
+                    <a href="#" class="btn btn-secondary">Connect</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section HTML -->
+    <section id="stats" class="section parallax-section">
+        <div class="parallax-bg"></div>
+        <h2 class="section-title">What we have done so far</h2>
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-card" data-aos="zoom-in" data-aos-delay="100">
+                    <div class="stat-number" data-count="50000">0</div>
+                    <div class="stat-text">Students guided</div>
+                </div>
+                <div class="stat-card" data-aos="zoom-in" data-aos-delay="200">
+                    <div class="stat-number" data-count="500">0</div>
+                    <div class="stat-text">Expert mentors available</div>
+                </div>
+                <div class="stat-card" data-aos="zoom-in" data-aos-delay="300">
+                    <div class="stat-number" data-count="200">0</div>
+                    <div class="stat-text">Career paths covered</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stream Section -->
+    <section class="streams">
+        <div class="container">
+            <h2 class="section-title">Choose Your Stream</h2>
+            <div class="stream-container">
+                <div class="stream-card">
+                    <div class="stream-icon">
+                        <i class="fas fa-calculator"></i>
+                    </div>
+                    <h3>Maths</h3>
+                    <p>Engineering, Data Science, Technology</p>
+                    <a href="#" class="btn btn-outline">Explore</a>
+                </div>
+                <div class="stream-card">
+                    <div class="stream-icon">
+                        <i class="fas fa-dna"></i>
+                    </div>
+                    <h3>Bio</h3>
+                    <p>Medicine, Healthcare, Biotech, Research</p>
+                    <a href="#" class="btn btn-outline">Explore</a>
+                </div>
+                <div class="stream-card">
+                    <div class="stream-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>Commerce</h3>
+                    <p>Business, Finance, Accounting, Marketing</p>
+                    <a href="#" class="btn btn-outline">Explore</a>
+                </div>
+                <div class="stream-card">
+                    <div class="stream-icon">
+                        <i class="fas fa-paint-brush"></i>
+                    </div>
+                    <h3>Arts</h3>
+                    <p>Creative fields, Literature, Media, Design</p>
+                    <a href="#" class="btn btn-outline">Explore</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq" id="faq">
+        <div class="container">
+            <h2 class="section-title">Frequently Asked Questions</h2>
+            <div class="faq-container">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>How does career guidance work?</h3>
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Our career guidance process involves a comprehensive assessment of your skills, interests,
+                            and aptitudes. We then match you with suitable career options and provide personalized
+                            mentorship to help you make informed decisions.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>Is the mentorship service free?</h3>
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>We offer both free and premium mentorship services. Basic career guidance is available for
+                            free, while personalized 1:1 mentorship with industry experts comes with our premium plans
+                            at affordable rates.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>How long does it take to find the right career path?</h3>
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>The timeline varies for each individual. Some students find clarity within a few sessions,
+                            while others may take a few months of exploration. Our mentors work at your pace to ensure
+                            you make the right decision without rushing.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>Do you provide career guidance for all streams?</h3>
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yes, we cover all major educational streams including Science, Commerce, Arts, and various
+                            specialized fields. Our mentor network includes experts from diverse professional
+                            backgrounds to provide guidance across all career paths.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Section -->
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <h2 style="color: var(--secondary);">Margdarshak</h2>
+                    <p>From career guidance to personalized mentorship...</p>
+                </div>
+                <div class="footer-links">
+                    <h3>Resources</h3>
+                    <ul>
+                        <li><a href="#">Career Guidance</a></li>
+                        <li><a href="#">Mentorship</a></li>
+                        <li><a href="#">Career Quiz</a></li>
+                        <li><a href="#">User Strategy</a></li>
+                        <li><a href="#">About</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h3>Company</h3>
+                    <ul>
+                        <li><a href="#">About Margdarshak</a></li>
+                        <li><a href="#">Contact & Support</a></li>
+                        <li><a href="#">Success Stories</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contact">
+                    <h3>Contact Us</h3>
+                    <p><i class="fas fa-envelope"></i> info@margdarshak.com</p>
+                    <p><i class="fas fa-phone"></i> +91 9876543210</p>
+                    <div class="social-icons">
+                        <p>Follow us on:</p>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Margdarshak. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/ScrollTrigger.min.js"></script>
+    <script src="script.js"></script>
+
+</body>
+
+</html>
