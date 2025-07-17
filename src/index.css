@@ -1,0 +1,62 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+@import "tailwindcss";
+
+@theme {
+    /* Light mode colors */
+    --color-primary: rgb(162, 89, 255);
+    --color-secondary: rgb(157, 78, 221);
+    --color-accent: rgb(123, 44, 191);
+    --color-text: rgb(44, 44, 44);
+    --color-bg: rgb(255, 238, 255);
+
+    /* Dark mode colors */
+    --color-primary-dark: rgb(157, 78, 221);
+    --color-secondary-dark: rgb(123, 44, 191);
+    --color-accent-dark: rgb(162, 89, 255);
+    --color-text-dark: rgb(255, 238, 255);
+    /* --color-bg-dark: rgb(44, 44, 44); */
+    --color-bg-dark: rgb(0, 0, 0);
+}
+
+/* Apply dark mode variables using media query */
+@media (prefers-color-scheme: light) {
+    :root {
+        /* set the light theme by default first then uncomment the next line */
+        --color-primary: var(--color-primary-dark);
+        --color-secondary: var(--color-secondary-dark);
+        --color-accent: var(--color-accent-dark);
+        --color-text: var(--color-text-dark);
+        --color-bg: var(--color-bg-dark);
+    }
+}
+
+/* Apply dark mode variables when dark class is present */
+.dark {
+    --color-primary: var(--color-primary-dark);
+    --color-secondary: var(--color-secondary-dark);
+    --color-accent: var(--color-accent-dark);
+    --color-text: var(--color-text-dark);
+    --color-bg: var(--color-bg-dark);
+}
+
+@layer base {
+    body {
+        font-family: 'Poppins', sans-serif;
+    }
+}
+
+@layer components {
+    .flex-center {
+    @apply flex justify-center items-center;
+  }
+
+  .flex-between {
+    @apply flex justify-between items-center;
+  }
+
+  .flex-col-center {
+    @apply flex flex-col justify-center items-center;
+  }
+}
+
