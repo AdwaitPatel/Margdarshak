@@ -6,6 +6,7 @@ import {
   faBriefcase,
   faPaintBrush,
 } from "@fortawesome/free-solid-svg-icons";
+import { Link } from "react-router-dom";
 
 const StreamCard = ({ icon, title, description, exploreLink }) => (
   <div
@@ -19,12 +20,12 @@ const StreamCard = ({ icon, title, description, exploreLink }) => (
     />
     <h3 className="text-xl font-semibold mb-4">{title}</h3>
     <p className="text-text opacity-80 mb-6 min-h-[50px]">{description}</p>
-    <a
-      href={exploreLink}
+    <Link
+      to={exploreLink}
       className="px-4 py-2 rounded-full hover:bg-accent transition-colors border border-[var(--color-primary)] text-[var(--color-primary)] hover:bg-[var(--color-primary)] hover:text-white"
     >
       Explore
-    </a>
+    </Link>
   </div>
 );
 
@@ -34,25 +35,25 @@ const Streams = () => {
       icon: faCalculator,
       title: "Maths",
       description: "Engineering, Data Science, Technology",
-      exploreLink: "#",
+      exploreLink: "/careers/PCM",
     },
     {
       icon: faHeartbeat,
       title: "Bio",
       description: "Medicine, Healthcare, Biotech, Research",
-      exploreLink: "#",
+      exploreLink: "/careers/PCB",
     },
     {
       icon: faBriefcase,
       title: "Commerce",
       description: "Business, Finance, Accounting, Marketing",
-      exploreLink: "#",
+      exploreLink: "/careers/Commerce",
     },
     {
       icon: faPaintBrush,
       title: "Arts",
       description: "Creative fields, Literature, Media, Design",
-      exploreLink: "#",
+      exploreLink: "/careers/Arts",
     },
   ];
 
