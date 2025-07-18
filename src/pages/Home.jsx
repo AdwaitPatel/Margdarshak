@@ -1,23 +1,25 @@
-import React from "react";
-import Navbar from "../components/Home/Navbar";
+
+import Navbar from "../components/Common/Navbar";
 import HeroSection from "../components/Home/HeroSection";
-import CategoriesSection from "../components/Home/CategoriesSection";
-import MentorshipSection from "../components/Home/MentorshipSection";
-import FactsSection from "../components/Home/FactsSection";
-import FAQSection from "../components/Home/FAQSection";
-import Footer from "../components/Home/Footer";
+import SuccessStories from "../components/Home/SuccessStories";
+import Mentorship from "../components/Home/Mentorship";
+import Stats from "../components/Home/Stats";
+import Streams from "../components/Home/Streams";
+import FAQ from "../components/Home/FAQ";
+import Footer from "../components/Common/Footer";
 
 const Home = () => {
   return (
-    <>
+    <div className="duration-1000">
       <Navbar />
       <HeroSection />
-      <CategoriesSection />
-      <MentorshipSection />
-      <FactsSection />
-      <FAQSection />
+      <SuccessStories />
+      <Mentorship />
+      <Stats />
+      <Streams />
+      <FAQ />
       <Footer />
-    </>
+    </div>
   );
 };
 

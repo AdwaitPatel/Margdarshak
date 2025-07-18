@@ -2,8 +2,8 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 
 const Card = ({ children }) => (
-  <div className="min-h-screen flex items-center justify-center bg-[var(--color-primary-bg)] text-[var(--color-primary-text)] p-4">
-    <div className="w-full max-w-[550px] bg-transparent md:bg-[var(--color-secondary-bg)] border-0 md:border md:border-[var(--color-border-light)] rounded-[1.2rem] p-8 sm:p-12 shadow-2xl">
+  <div className="min-h-screen flex items-center justify-center bg-[var(--color-primary)] text-[var(--color-text)] p-4">
+    <div className="w-full max-w-[550px] bg-transparent md:bg-[var(--color-bg)] border-0 md:border md:border-[var(--color-accent)] rounded-[1.2rem] p-8 sm:p-12 shadow-2xl">
       {children}
     </div>
   </div>
@@ -15,11 +15,13 @@ const Title = () => (
 
 const Confirmation = ({ message }) =>
   message && (
-    <div className="my-8 bg-[var(--color-card-bg)] border border-[var(--color-border-medium)] rounded-[0.7rem] p-5 text-light text-center font-medium text-base">
+    <div className="my-8 bg-[var(--color-bg)] border border-[var(--color-accent)] rounded-[0.7rem] p-5 text-light text-center font-medium text-base">
       {message.text && message.email ? (
         <>
           {message.text.before}
-          <span className="text-[var(--color-highlight)] font-semibold">{message.email}</span>
+          <span className="text-[var(--color-primary)] font-semibold">
+            {message.email}
+          </span>
           {message.text.after}
         </>
       ) : (
@@ -53,11 +55,11 @@ const ForgotPasswordForm = ({ setConfirmationMessage }) => {
         name="email"
         placeholder="Enter your registered email"
         required
-        className="w-full p-3.5 bg-[var(--color-card-bg)] border border-[var(--color-border-light)] rounded-[0.7rem] text-[var(--color-primary-text)] text-[1.1rem] placeholder-[var(--color-secondary-text)] placeholder:text-base focus:outline-none focus:border-[var(--color-highlight)] focus:ring-4 focus:ring-[var(--color-highlight)]/20"
+        className="w-full p-3.5 bg-[var(--color-bg)] border border-[var(--color-accent)] rounded-[0.7rem] text-[var(--color-text)] text-[1.1rem] placeholder-gray-500 placeholder:text-base focus:outline-none focus:border-[var(--color-primary)] focus:ring-4 focus:ring-[var(--color-primary)]/20"
       />
       <button
         type="submit"
-        className="w-full py-3.5 bg-[var(--color-highlight)] border-none rounded-[0.7rem] text-white font-semibold text-[1.05rem] hover:bg-[var(--color-highlight-alt)] transition-colors"
+        className="w-full py-3.5 bg-[var(--color-primary)] border-none rounded-[0.7rem] text-white font-semibold text-[1.05rem] hover:bg-[var(--color-secondary)] transition-colors"
       >
         Send Reset Link
       </button>
@@ -66,10 +68,10 @@ const ForgotPasswordForm = ({ setConfirmationMessage }) => {
 };
 
 const LoginLink = () => (
-  <div className="mt-8 text-center text-base text-[var(--color-secondary-text)]">
+  <div className="mt-8 text-center text-base text-[var(--color-text)] opacity-70">
     Back to{" "}
     <Link to="/login">
-      <span className="text-[var(--color-highlight)] font-medium hover:underline">
+      <span className="text-[var(--color-primary)] font-medium hover:underline">
         Login
       </span>
     </Link>

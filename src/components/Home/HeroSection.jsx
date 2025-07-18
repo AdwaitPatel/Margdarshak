@@ -1,53 +1,80 @@
-import { Link } from 'react-router-dom';
-import React from 'react';
+import React, { useEffect } from "react";
+import CinematicSlider from "./CinematicSlider.jsx";
 
-const HeroSection = () => {
+const HeroSection = ({
+  title = "Find Your Perfect Career Path",
+  description = "Discover your strengths, explore career options, and get personalized guidance from expert mentors to build a successful future.",
+  buttonText = "View Success Stories",
+  buttonLink = "#",
+  slides = [
+    {
+      image:
+        "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
+      title: "Personalized Career Guidance",
+      description:
+        "Get tailored advice based on your skills, interests, and aspirations",
+      buttonText: "Learn More",
+      buttonLink: "#",
+    },
+    {
+      image:
+        "https://images.unsplash.com/photo-1523240795612-9a054b0db644?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
+      title: "Expert Mentorship",
+      description:
+        "Connect with industry professionals who can guide your career journey",
+      buttonText: "Find a Mentor",
+      buttonLink: "#",
+    },
+    {
+      image:
+        "https://images.unsplash.com/photo-1577896851231-70ef18881754?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
+      title: "Comprehensive Assessments",
+      description:
+        "Discover your strengths and find careers that match your personality",
+      buttonText: "Take Assessment",
+      buttonLink: "#",
+    },
+  ],
+}) => {
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollPosition = window.scrollY;
+      if (scrollPosition < window.innerHeight) {
+        document.querySelector(".hero-bg").style.backgroundPositionY = `${
+          scrollPosition * 0.5
+        }px`;
+      }
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
-    <section className="min-h-screen flex items-center pt-20 pb-16 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 relative overflow-hidden">
-      {/* Background decorative elements */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute top-20 left-20 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-20 right-20 w-80 h-80 bg-blue-400/10 rounded-full blur-3xl"></div>
-      </div>
+    <section className="hero-bg min-h-screen flex items-center py-20 bg-[var(--color-bg)] relative overflow-hidden duration-1000">
+      {/* Top Right Circle */}
+      <div className="absolute top-[-80px] right-[-80px] w-[300px] h-[300px] bg-gradient-to-br from-purple-400/30 to-purple-600/40 rounded-full opacity-40"></div>
 
-      <div className="max-w-6xl mx-auto px-5 relative z-10">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
-          {/* Hero Text */}
-          <div className="text-center lg:text-left">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
-              <span className="bg-gradient-to-r from-white to-blue-400 bg-clip-text text-transparent">
-                Find Your Perfect Career Path
-              </span>
-            </h1>
-            <p className="text-xl text-slate-300 mb-8 max-w-2xl mx-auto lg:mx-0">
-              Discover your strengths, explore career options, and get personalized guidance from expert 
-              mentors to build a successful future.
-            </p>
-            <Link 
-              to="/career-quiz"
-              className="inline-block px-8 py-4 bg-gradient-to-r from-blue-500 to-blue-600 text-white font-semibold rounded-full hover:from-blue-600 hover:to-blue-700 transition-all duration-300 hover:-translate-y-1 shadow-lg hover:shadow-blue-500/25"
-            >
-              Find your career option
-            </Link>
-          </div>
+      {/* Bottom Left Circle */}
+      <div className="absolute bottom-[-100px] left-[-100px] w-[350px] h-[350px] bg-gradient-to-tr from-purple-300/25 to-purple-500/35 rounded-full opacity-40"></div>
 
-          {/* Hero Image */}
-          <div className="flex justify-center lg:justify-end">
-            <div className="relative">
-              <div className="w-96 h-64 md:w-[500px] md:h-80 bg-gradient-to-br from-blue-500/20 to-blue-600/20 rounded-3xl border border-blue-400/20 backdrop-blur-sm overflow-hidden relative">
-                <img 
-                  src="https://plus.unsplash.com/premium_photo-1733353256078-54e117018245?q=80&w=2338&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" 
-                  alt="Career guidance illustration" 
-                  className="w-full h-full object-cover rounded-3xl"
-                />
-                <div className="absolute inset-0 bg-gradient-to-br from-blue-500/30 to-blue-600/30 rounded-3xl"></div>
-              </div>
-              {/* Floating elements */}
-              <div className="absolute -top-4 -right-4 w-8 h-8 bg-blue-400 rounded-full animate-pulse"></div>
-              <div className="absolute -bottom-6 -left-6 w-12 h-12 bg-blue-500/50 rounded-full animate-bounce"></div>
-            </div>
-          </div>
+      <div className="absolute top-0 right-0 w-[300px] h-[300px] bg-[var(--color-primary)]/15 rounded-full -z-10"></div>
+      <div className="absolute bottom-0 left-0 w-[300px] h-[300px] bg-[var(--color-primary)]/15 rounded-full -z-10"></div>
+      <div className="container px-4 mx-auto flex flex-col md:flex-row items-center justify-between gap-8 lg:mx-30">
+        <div className="flex-1 text-center md:text-left mt-20 md:mt-4">
+          <h1 className="text-6xl font-bold text-[var(--color-primary)] mb-6">
+            {title}
+          </h1>
+          <p className="text-lg mb-8 max-w-[600px] mx-auto md:mx-0 dark:text-white">
+            {description}
+          </p>
+          <a
+            href={buttonLink}
+            className="px-6 py-3 bg-[var(--color-primary)] text-white rounded-full hover:bg-[var(--color-accent)] transition-colors cursor-pointer"
+          >
+            {buttonText}
+          </a>
         </div>
+        <CinematicSlider slides={slides} />
       </div>
     </section>
   );

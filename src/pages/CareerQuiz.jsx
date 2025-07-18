@@ -1,6 +1,6 @@
 import CareerQuiz from "../components/CareerQuiz/CareerQuiz";
-import Footer from "../components/Home/Footer";
-import Navbar from "../components/Home/Navbar";
+import Navbar from "../components/Common/Navbar";
+import Footer from "../components/Common/Footer";
 
 const CareerQuizPage = () => {
   return (
