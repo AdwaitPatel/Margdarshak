@@ -6,6 +6,7 @@ import {
   faTwitter,
   faInstagram,
 } from "@fortawesome/free-brands-svg-icons";
+import { Link } from "react-router-dom";
 
 const Footer = () => (
   <footer
@@ -14,12 +15,12 @@ const Footer = () => (
   >
     <div className="container mx-auto px-4 grid grid-cols-1 md:grid-cols-4 gap-8">
       <div className="text-center md:text-left">
-        <div className="text-3xl font-extrabold text-white">
+        <Link to="/" className="text-3xl font-extrabold text-white">
           <span className="text-[var(--color-primary)] dark:text-[var(--color-secondary)]">
             Navi
           </span>
           Quest
-        </div>
+        </Link>
         <p className="opacity-80 max-w-[300px] mx-auto md:mx-0 mt-5">
           From career guidance to personalized mentorship
         </p>
@@ -30,19 +31,19 @@ const Footer = () => (
         </h3>
         <ul>
           {[
-            "Career Guidance",
-            "Mentorship",
-            "Career Quiz",
-            "User Strategy",
-            "About",
-          ].map((item) => (
-            <li key={item} className="mb-[12.8px]">
-              <a
-                href="#"
+            {name: "Career Guidance", link: "/career-guidance"},
+            {name: "Mentorship", link: "/mentorship"},
+            {name: "Career Quiz", link: "/career-quiz"},
+            {name: "User Strategy", link: "/user-strategy"},
+            {name: "About", link: "/about"},
+          ].map(({ name, link }) => (
+            <li key={name} className="mb-[12.8px]">
+              <Link
+                to={link}
                 className="hover:text-primary dark:hover:text-[var(--color-secondary)] hover:pl-1 transition-all"
               >
-                {item}
-              </a>
+                {name}
+              </Link>
             </li>
           ))}
         </ul>
@@ -53,19 +54,19 @@ const Footer = () => (
         </h3>
         <ul>
           {[
-            "About Margdarshak",
-            "Contact & Support",
-            "Success Stories",
-            "Privacy Policy",
-            "Contact",
-          ].map((item) => (
-            <li key={item} className="mb-[12.8px]">
-              <a
-                href="#"
+            {name: "About Margdarshak", link: "/"},
+            {name: "Contact & Support", link: "/contact"},
+            {name: "Success Stories", link: "/"},
+            {name: "Privacy Policy", link: "/"},
+            {name: "Terms of Service", link: "/"},
+          ].map(({ name, link }) => (
+            <li key={name} className="mb-[12.8px]">
+              <Link
+                to={link}
                 className="hover:text-primary dark:hover:text-[var(--color-secondary)] hover:pl-1 transition-all"
               >
-                {item}
-              </a>
+                {name}
+              </Link>
             </li>
           ))}
         </ul>

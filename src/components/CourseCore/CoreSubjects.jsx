@@ -128,7 +128,7 @@ const CoreSubjects = () => {
   };
 
   return (
-    <section id="core-subject" className="core-subjects py-10 md:py-20 bg-[var(--color-bg)] dark:text-white">
+    <section id="core-subject" className="core-subjects py-10 md:py-20 bg-[var(--color-bg)] dark:text-white transition-all duration-1000">
       <div className="container mx-auto px-5">
         <h2 className="section-title text-3xl md:text-4xl font-bold text-center mb-8 relative after:content-[''] after:absolute after:bottom-[-5px] after:left-1/2 after:-translate-x-1/2 after:w-12 after:h-1 after:bg-[var(--color-accent)] after:rounded-full">Core Subjects</h2>
         <div className="study-materials-container max-w-[1200px] mx-auto px-5">

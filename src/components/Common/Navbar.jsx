@@ -237,46 +237,46 @@ const Navbar = () => {
               )}
             </li>
             <li className="relative group overflow-hidden">
-              <a
-                href=""
+              <Link
+                to="/"
                 className="inline-block relative text-[var(--color-text)] after:absolute after:left-0 after:bottom-0 after:w-0 after:h-[2px] after:bg-[var(--color-primary)] after:transition-all after:duration-300 group-hover:after:w-full"
               >
                 Home
-              </a>
+              </Link>
             </li>
             <li className="relative group overflow-hidden">
-              <a
-                href=""
+              <Link
+                to="/mentors"
                 className="inline-block relative text-[var(--color-text)] after:absolute after:left-0 after:bottom-0 after:w-0 after:h-[2px] after:bg-[var(--color-primary)] after:transition-all after:duration-300 group-hover:after:w-full"
               >
                 Mentors
-              </a>
+              </Link>
             </li>
             <li className="relative group overflow-hidden">
-              <a
-                href=""
+              <Link
+                to="/career-quiz"
                 className="inline-block relative text-[var(--color-text)] after:absolute after:left-0 after:bottom-0 after:w-0 after:h-[2px] after:bg-[var(--color-primary)] after:transition-all after:duration-300 group-hover:after:w-full"
               >
                 Career Path
-              </a>
+              </Link>
             </li>
           </ul>
         </div>
 
         {/* Section 3: Auth buttons & Theme Toggle */}
         <div className="flex-center gap-3">
-          <a
-            href=""
+          <Link
+            to="/login"
             className="bg-[var(--color-accent)] px-4 py-2 rounded-full text-white"
           >
             Login
-          </a>
-          <a
-            href=""
+          </Link>
+          <Link
+            to="/signup"
             className="bg-[var(--color-bg)] text-[var(--color-text)] px-3 py-2 rounded-full border border-[var(--color-accent)] hover:bg-[var(--color-accent)] hover:text-white hover:border-white hover:translate-y-[-2px] transition-all duration-300"
           >
             Signup
-          </a>
+          </Link>
           <button
             onClick={toggleTheme}
             className="relative w-14 h-7 rounded-full transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)] focus:ring-opacity-50 cursor-pointer"
@@ -361,29 +361,35 @@ const Navbar = () => {
                 </ul>
               )}
             </li>
+			<Link to="/">
             <li className="px-4 py-2 text-[var(--color-text)] hover:bg-[var(--color-primary)] hover:text-white rounded-md">
-              <a href="">Home</a>
+              <Link to="/">Home</Link>
             </li>
+			</Link>
+            <Link to="/">
             <li className="px-4 py-2 text-[var(--color-text)] hover:bg-[var(--color-primary)] hover:text-white rounded-md">
-              <a href="">Mentors</a>
+             Mentorship
             </li>
+			</Link>
+			<Link to="/career-quiz">
             <li className="px-4 py-2 text-[var(--color-text)] hover:bg-[var(--color-primary)] hover:text-white rounded-md">
-              <a href="">Career Path</a>
+				Career Path
             </li>
+			</Link>
           </ul>
           <div className="flex flex-col gap-3 pt-4">
-            <a
-              href=""
+            <Link
+              to="/login"
               className="bg-[var(--color-accent)] px-4 py-2 rounded-full text-white text-center"
             >
               Login
-            </a>
-            <a
-              href=""
+            </Link>
+            <Link
+              to="/signup"
               className="bg-[var(--color-bg)] text-[var(--color-text)] px-3 py-2 rounded-full border border-[var(--color-accent)] hover:bg-[var(--color-accent)] hover:text-white hover:border-white transition-all duration-300 text-center"
             >
               Signup
-            </a>
+            </Link>
           </div>
         </div>
       )}
