@@ -1,4 +1,7 @@
 import { useState, useRef, useEffect } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faBookOpen } from "@fortawesome/free-solid-svg-icons";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
   const [showDropdown, setShowDropdown] = useState(false);
@@ -105,13 +108,13 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="fixed top-0 w-full bg-[var(--color-bg)] p-4 border-b border-white">
+    <nav className="fixed top-0 z-50 w-full bg-[var(--color-bg)] p-4 border-b border-[var(--color-accent)] duration-1000">
       {/* Mobile Layout */}
       <div className="flex justify-between items-center md:hidden">
         {/* Logo */}
-        <div className="text-3xl font-extrabold text-[var(--color-accent)]">
-          <span className="text-[var(--color-primary)]">Marg</span>darshak
-        </div>
+        <Link to="/" className="text-3xl font-extrabold text-[var(--color-accent)]">
+          <span className="text-[var(--color-primary)]">Navi</span>Quest
+        </Link>
 
         {/* Mobile Menu Button */}
         <div className="flex items-center gap-4">
@@ -181,9 +184,12 @@ const Navbar = () => {
       {/* Desktop Layout - Three Sections */}
       <div className="hidden md:flex justify-around items-center">
         {/* Section 1: Logo */}
-        <div className="text-3xl font-extrabold text-[var(--color-accent)]">
-          <span className="text-[var(--color-primary)]">Marg</span>darshak
-        </div>
+        <Link
+          to="/"
+          className="text-3xl font-extrabold text-[var(--color-accent)]"
+        >
+          <span className="text-[var(--color-primary)]">Navi</span>Quest
+        </Link>
 
         {/* Section 2: Navigation Links */}
         <div className="">
@@ -194,6 +200,7 @@ const Navbar = () => {
               onMouseLeave={handleMouseLeave}
             >
               <button className="bg-[var(--color-accent)] text-white p-2 rounded-full flex items-center gap-2 focus:outline-none">
+                <FontAwesomeIcon icon={faBookOpen} />
                 Course Core
                 <svg
                   className={`w-4 h-4 transition-transform duration-300 ${
@@ -211,15 +218,21 @@ const Navbar = () => {
               </button>
               {showDropdown && (
                 <ul className="absolute left-0 mt-2 w-40 bg-[var(--color-bg)] text-[var(--color-text)] rounded-lg shadow-lg transition-all duration-300">
+                  <Link to="/course-core/10th">
+                    <li className="px-4 py-2 hover:bg-[var(--color-primary)] hover:text-white">
+                      10th
+                    </li>
+                  </Link>
+				  <Link to="/course-core/11th">
                   <li className="px-4 py-2 hover:bg-[var(--color-primary)] hover:text-white">
-                    <a href="#">10th</a>
+                    11th
                   </li>
-                  <li className="px-4 py-2 hover:bg-[var(--color-primary)] hover:text-white">
-                    <a href="#">11th</a>
-                  </li>
-                  <li className="px-4 py-2 hover:bg-[var(--color-primary)] hover:text-white">
-                    <a href="#">12th</a>
-                  </li>
+				  </Link>
+                  <Link to="/course-core/12th">
+                    <li className="px-4 py-2 hover:bg-[var(--color-primary)] hover:text-white">
+                      12th
+                    </li>
+				  </Link>
                 </ul>
               )}
             </li>
@@ -260,13 +273,13 @@ const Navbar = () => {
           </a>
           <a
             href=""
-            className="bg-[var(--color-bg)] text-[var(--color-text)] px-3 py-2 rounded-full border border-[var(--color-accent)] hover:bg-[var(--color-accent)] hover:text-white hover:border-white transition-all duration-300"
+            className="bg-[var(--color-bg)] text-[var(--color-text)] px-3 py-2 rounded-full border border-[var(--color-accent)] hover:bg-[var(--color-accent)] hover:text-white hover:border-white hover:translate-y-[-2px] transition-all duration-300"
           >
             Signup
           </a>
           <button
             onClick={toggleTheme}
-            className="relative w-14 h-7 rounded-full transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)] focus:ring-opacity-50"
+            className="relative w-14 h-7 rounded-full transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)] focus:ring-opacity-50 cursor-pointer"
             style={{
               backgroundColor: isDarkMode
                 ? "var(--color-accent)"
@@ -330,15 +343,21 @@ const Navbar = () => {
               </button>
               {showDropdown && (
                 <ul className="mt-2 space-y-1 bg-[var(--color-bg)] text-[var(--color-text)] rounded-lg shadow-lg">
+				  <Link to="/course-core/10th">
                   <li className="px-4 py-2 hover:bg-[var(--color-primary)] hover:text-white">
-                    <a href="#">10th</a>
+                    10th
                   </li>
+				  </Link>
+				  <Link to="/course-core/11th">
                   <li className="px-4 py-2 hover:bg-[var(--color-primary)] hover:text-white">
-                    <a href="#">11th</a>
+                    11th
                   </li>
+				  </Link>
+				  <Link to="/course-core/12th">
                   <li className="px-4 py-2 hover:bg-[var(--color-primary)] hover:text-white">
-                    <a href="#">12th</a>
+                    12th
                   </li>
+				  </Link>
                 </ul>
               )}
             </li>

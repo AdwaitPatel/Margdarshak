@@ -1,15 +1,16 @@
-import "./App.css";
-import Navbar from "./components/Common/Navbar";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Tenth from "./pages/10th.jsx";
+import Home from "./pages/Home.jsx";
 
-function App() {
+const App = () => {
   return (
-    <div className="bg-black h-[2200px]">
-      <Navbar />
-      <div className="flex-center text-5xl text-white pt-[400px]">
-        <h1>Find Your Perfect Career Path</h1>
-      </div>
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="course-core/10th" element={<Tenth />} />
+      </Routes>
+    </Router>
   );
-}
+};
 
 export default App;

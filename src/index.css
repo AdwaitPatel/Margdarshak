@@ -2,6 +2,8 @@
 
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 @theme {
     /* Light mode colors */
     --color-primary: rgb(162, 89, 255);
@@ -43,6 +45,9 @@
 @layer base {
     body {
         font-family: 'Poppins', sans-serif;
+    }
+    button {
+        cursor: pointer;
     }
 }
 
