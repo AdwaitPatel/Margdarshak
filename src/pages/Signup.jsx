@@ -1,5 +1,5 @@
 import Signup from "../components/Auth/Signup"
-import Footer from "../components/Home/Footer";
+import Footer from "../components/Common/Footer";
 
 const SignupPage = () => {
     return (

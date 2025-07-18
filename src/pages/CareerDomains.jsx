@@ -1,6 +1,6 @@
 import CareerScopes from "../components/Explore/CareerDomains";
-import Navbar from "../components/Home/Navbar";
-import Footer from "../components/Home/Footer";
+import Navbar from "../components/Common/Navbar";
+import Footer from "../components/Common/Footer";
 
 const CareerDomainsPage = ({ stream }) => {
   return (

@@ -1,6 +1,6 @@
 
 import Login from "../components/Auth/Login";
-import Footer from "../components/Home/Footer";
+import Footer from "../components/Common/Footer";
 
 const LoginPage = () => {
     return (
