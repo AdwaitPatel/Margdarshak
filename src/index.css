@@ -4,8 +4,8 @@
 
 @custom-variant dark (&:where(.dark, .dark *));
 
-@theme {
-    /* Light mode colors */
+:root {
+    /* Light mode colors (these will be the default) */
     --color-primary: rgb(162, 89, 255);
     --color-secondary: rgb(157, 78, 221);
     --color-accent: rgb(123, 44, 191);
@@ -17,14 +17,12 @@
     --color-secondary-dark: rgb(123, 44, 191);
     --color-accent-dark: rgb(162, 89, 255);
     --color-text-dark: rgb(255, 238, 255);
-    /* --color-bg-dark: rgb(44, 44, 44); */
     --color-bg-dark: rgb(0, 0, 0);
 }
 
-/* Apply dark mode variables using media query */
-@media (prefers-color-scheme: light) {
+/* Apply dark mode variables when the user's system prefers a dark color scheme */
+@media (prefers-color-scheme: dark) {
     :root {
-        /* set the light theme by default first then uncomment the next line */
         --color-primary: var(--color-primary-dark);
         --color-secondary: var(--color-secondary-dark);
         --color-accent: var(--color-accent-dark);
@@ -33,7 +31,7 @@
     }
 }
 
-/* Apply dark mode variables when dark class is present */
+/* Apply dark mode variables when the 'dark' class is explicitly present on an element */
 .dark {
     --color-primary: var(--color-primary-dark);
     --color-secondary: var(--color-secondary-dark);
@@ -53,15 +51,14 @@
 
 @layer components {
     .flex-center {
-    @apply flex justify-center items-center;
-  }
+        @apply flex justify-center items-center;
+    }
 
-  .flex-between {
-    @apply flex justify-between items-center;
-  }
+    .flex-between {
+        @apply flex justify-between items-center;
+    }
 
-  .flex-col-center {
-    @apply flex flex-col justify-center items-center;
-  }
+    .flex-col-center {
+        @apply flex flex-col justify-center items-center;
+    }
 }
-

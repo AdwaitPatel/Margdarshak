@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import MentorsProfile from './Home/MentorsProfile';  
+import MentorsProfile from './Home/MentorsProfile';
 
+// Removed import for CinematicSlider and HeroSection as they are no longer used here.
+// import CinematicSlider from './CinematicSlider.jsx';
+// import HeroSection from './HeroSection.jsx';
 
 const mentorsData = [
   {
@@ -72,48 +75,46 @@ const MentorCard = ({ mentor, onViewProfile }) => {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
       whileHover={{ scale: 1.03 }}
-      className="rounded-lg overflow-hidden shadow-lg bg-gray-800" // Removed cursor-pointer and onClick from the whole card
+      className="rounded-lg overflow-hidden shadow-lg bg-[var(--color-bg)] text-[var(--color-text)] border border-[var(--color-primary)]/20"
     >
       <div className="p-6">
         <div className="flex items-center mb-4">
           <motion.img
             src={mentor.imageUrl}
             alt={mentor.name}
-            className="w-16 h-16 rounded-full object-cover mr-4 border-2 border-blue-500"
+            className="w-16 h-16 rounded-full object-cover mr-4 border-2 border-[var(--color-primary)]"
             whileHover={{ scale: 1.1 }}
             transition={{ type: "spring", stiffness: 400, damping: 10 }}
             onError={(e) => { e.target.onerror = null; e.target.src = `https://placehold.co/100x100/6B7280/ffffff?text=${mentor.name.split(' ').map(n => n[0]).join('')}`; }}
           />
           <div>
-            <h3 className="text-lg font-semibold text-white">
+            <h3 className="text-lg font-semibold text-[var(--color-primary)]">
               {mentor.name}
             </h3>
-            <p className="text-sm text-blue-400">
+            <p className="text-sm text-[var(--color-accent)]">
               {mentor.subject}
             </p>
           </div>
         </div>
-        <div className="p-4 rounded-lg bg-gray-700">
-          <p className="text-sm text-gray-300">
-            <span className="font-medium text-white">Experience:</span> {mentor.experience}
+        <div className="p-4 rounded-lg bg-[var(--color-secondary)]/20">
+          <p className="text-sm text-[var(--color-text)]">
+            <span className="font-medium text-[var(--color-primary)]">Experience:</span> {mentor.experience}
           </p>
           <div className="flex justify-between items-center mt-3">
-            {/* The "View Profile" button now exclusively triggers the profile view */}
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="py-2 px-4 rounded-lg font-medium bg-blue-600 text-white hover:bg-blue-700 transition-colors"
-              onClick={() => onViewProfile(mentor)} // This is the primary click handler for opening profile
+              className="py-2 px-4 rounded-lg font-medium bg-[var(--color-primary)] text-white hover:bg-[var(--color-accent)] transition-colors"
+              onClick={() => onViewProfile(mentor)}
             >
               View Profile
             </motion.button>
             <motion.button
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
-              className="w-10 h-10 rounded-full bg-blue-600 text-white flex items-center justify-center hover:bg-blue-700 transition-colors"
-              onClick={() => onViewProfile(mentor)} // This button also triggers profile view
+              className="w-10 h-10 rounded-full bg-[var(--color-primary)] text-white flex items-center justify-center hover:bg-[var(--color-accent)] transition-colors"
+              onClick={() => onViewProfile(mentor)}
             >
-              {/* FiArrowRight icon replaced with inline SVG */}
               <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
               </svg>
@@ -124,7 +125,6 @@ const MentorCard = ({ mentor, onViewProfile }) => {
     </motion.div>
   );
 };
-
 
 
 // Main App Component
@@ -149,7 +149,7 @@ function App() {
       mentor.subject.toLowerCase().includes(searchQuery.toLowerCase())
     );
     setFilteredMentors(results);
-  }, [searchQuery, mentorsData]);
+  }, [searchQuery]);
 
   const handleViewProfile = (mentor) => {
     setSelectedMentor(mentor);
@@ -160,23 +160,30 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-900 font-sans">
-     
+    // Applied hero-bg and circular decorations to the main app container
+    // Changed bg-gray-900 to var(--color-bg) for consistency with theme
+    <div className="min-h-screen relative overflow-hidden bg-[var(--color-bg)] text-[var(--color-text)] duration-1000">
+      {/* Top Right Circle */}
+      <div className="absolute top-[-80px] right-[-80px] w-[300px] h-[300px] bg-gradient-to-br from-purple-400/30 to-purple-600/40 rounded-full opacity-40"></div>
+
+      {/* Bottom Left Circle */}
+      <div className="absolute bottom-[-100px] left-[-100px] w-[350px] h-[350px] bg-gradient-to-tr from-purple-300/25 to-purple-500/35 rounded-full opacity-40"></div>
+
+      <div className="absolute top-0 right-0 w-[300px] h-[300px] bg-[var(--color-primary)]/15 rounded-full -z-10"></div>
+      <div className="absolute bottom-0 left-0 w-[300px] h-[300px] bg-[var(--color-primary)]/15 rounded-full -z-10"></div>
 
       {selectedMentor ? (
-        // Render MentorProfile component when a mentor is selected
         <MentorsProfile mentor={selectedMentor} onBackToList={handleBackToList} />
       ) : (
-        // Render mentor list and search when no mentor is selected
-        <main className="flex-1 p-6 md:p-8 max-w-6xl mx-auto w-full bg-gray-900 min-h-screen">
+        <main className="flex-1 p-6 md:p-8 max-w-6xl mx-auto w-full min-h-screen relative z-10"> {/* Added relative z-10 to ensure content is above circles */}
           <motion.div
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
             className="mb-8"
           >
-            <h2 className="text-3xl font-bold text-blue-400">Find Your Mentor</h2>
-            <p className="text-gray-400 mt-2">Connect with experienced professionals in your field</p>
+            <h2 className="text-3xl font-bold text-[var(--color-primary)]">Find Your Mentor</h2>
+            <p className="text-[var(--color-text)] mt-2">Connect with experienced professionals in your field</p>
           </motion.div>
 
           <motion.div
@@ -186,8 +193,7 @@ function App() {
             className="relative mb-8"
           >
             <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-              {/* FiSearch icon replaced with inline SVG */}
-              <svg className="h-5 w-5 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <svg className="h-5 w-5 text-[var(--color-accent)]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
               </svg>
             </div>
@@ -196,7 +202,7 @@ function App() {
               placeholder="Search mentors by name or subject..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-10 pr-4 py-3 rounded-lg border border-gray-700 bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent placeholder-gray-500"
+              className="w-full pl-10 pr-4 py-3 rounded-lg border border-[var(--color-secondary)] bg-[var(--color-secondary)]/20 text-[var(--color-text)] focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)] focus:border-transparent placeholder-[var(--color-accent)]"
             />
           </motion.div>
 
@@ -208,21 +214,21 @@ function App() {
                   initial={{ opacity: 0, scale: 0.9 }}
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ duration: 0.3, delay: index * 0.1 }}
-                  className="rounded-lg overflow-hidden bg-gray-800 p-6"
+                  className="rounded-lg overflow-hidden bg-[var(--color-bg)] p-6 border border-[var(--color-primary)]/20"
                 >
                   <div className="animate-pulse">
                     <div className="flex items-center mb-4">
-                      <div className="w-16 h-16 rounded-full bg-gray-700 mr-4"></div>
+                      <div className="w-16 h-16 rounded-full bg-[var(--color-secondary)]/50 mr-4"></div>
                       <div>
-                        <div className="h-4 w-32 bg-gray-700 rounded mb-2"></div>
-                        <div className="h-3 w-24 bg-gray-700 rounded"></div>
+                        <div className="h-4 w-32 bg-[var(--color-secondary)]/50 rounded mb-2"></div>
+                        <div className="h-3 w-24 bg-[var(--color-secondary)]/50 rounded"></div>
                       </div>
                     </div>
-                    <div className="p-4 rounded-lg bg-gray-700">
-                      <div className="h-3 w-3/4 bg-gray-600 rounded mb-4"></div>
+                    <div className="p-4 rounded-lg bg-[var(--color-secondary)]/30">
+                      <div className="h-3 w-3/4 bg-[var(--color-secondary)]/50 rounded mb-4"></div>
                       <div className="flex justify-between">
-                        <div className="h-8 w-24 bg-gray-600 rounded"></div>
-                        <div className="h-8 w-8 bg-gray-600 rounded-full"></div>
+                        <div className="h-8 w-24 bg-[var(--color-secondary)]/50 rounded"></div>
+                        <div className="h-8 w-8 bg-[var(--color-secondary)]/50 rounded-full"></div>
                       </div>
                     </div>
                   </div>
@@ -234,9 +240,9 @@ function App() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.5 }}
-              className="p-8 rounded-lg text-center bg-gray-800"
+              className="p-8 rounded-lg text-center bg-[var(--color-bg)] border border-[var(--color-primary)]/20"
             >
-              <p className="text-gray-400">No mentors found matching your search.</p>
+              <p className="text-[var(--color-text)]">No mentors found matching your search.</p>
             </motion.div>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -249,8 +255,6 @@ function App() {
           )}
         </main>
       )}
-
-    
     </div>
   );
 }

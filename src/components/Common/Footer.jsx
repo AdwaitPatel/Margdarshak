@@ -58,7 +58,7 @@ const Footer = () => (
             {name: "Contact & Support", link: "/contact"},
             {name: "Success Stories", link: "/"},
             {name: "Privacy Policy", link: "/"},
-            {name: "Terms of Service", link: "/"},
+            {name: "Terms of Service", link: "/terms"},
           ].map(({ name, link }) => (
             <li key={name} className="mb-[12.8px]">
               <Link

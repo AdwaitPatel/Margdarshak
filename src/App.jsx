@@ -11,6 +11,7 @@ import ForgotPasswordPage from "./pages/ForgotPassword";
 import CareerDomainsPage from "./pages/CareerDomains";
 import ScrollToTop from "./components/ScrollToTop";
 import MentorsPage from './pages/Mentors';
+import Terms from './pages/Terms';
 
 
 const App = () => {
@@ -29,6 +30,7 @@ const App = () => {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/forgot-password" element={<ForgotPasswordPage />} />
         <Route path="/Mentors" element={<MentorsPage />} />
+        <Route path="/Terms" element={<Terms />} />
 
         {/* Explore pages */}
         <Route
