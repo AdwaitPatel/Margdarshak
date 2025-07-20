@@ -7,7 +7,7 @@ import ThemeToggle from "./ThemeToggle";
 const Logo = () => (
   <Link to="/" className="flex items-center gap-2">
     <img
-      src="/public/logo.png"
+      src="/logo.png"
       alt="NaviQuest Logo"
       className="h-16 w-auto dark:brightness-0 dark:invert transition-all duration-300"
     />
