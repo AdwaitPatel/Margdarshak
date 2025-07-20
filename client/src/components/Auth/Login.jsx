@@ -1,33 +1,35 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 
 const Card = ({ children }) => (
   <div className="min-h-screen flex items-center justify-center relative overflow-hidden bg-[#0a0a0a]">
     {/* Animated gradient background */}
     <div className="absolute inset-0 bg-gradient-to-br from-[var(--color-primary)] via-[var(--color-secondary)] to-[var(--color-primary)] opacity-50 animate-gradient"></div>
-    
+
     {/* Animated circles */}
     <div className="absolute top-0 left-0 w-[500px] h-[500px] rounded-full bg-[var(--color-primary)] blur-[80px] opacity-20 animate-blob1"></div>
     <div className="absolute bottom-0 right-0 w-[500px] h-[500px] rounded-full bg-[var(--color-secondary)] blur-[80px] opacity-20 animate-blob2"></div>
     <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full bg-[var(--color-primary)] blur-[80px] opacity-10 animate-pulse"></div>
-    
+
     {/* Cinematic lines */}
     <div className="absolute inset-0 bg-[url('/pattern.svg')] opacity-20 animate-pan-overlay"></div>
     <div className="absolute inset-0 bg-[linear-gradient(to_bottom,transparent_40%,rgba(0,0,0,0.8)_100%)]"></div>
-    
+
     {/* Floating particles */}
     <div className="absolute inset-0 overflow-hidden">
       <div className="particle-container">
         {[...Array(20)].map((_, i) => (
-          <div 
-            key={i} 
-            className={`particle absolute bg-white/30 rounded-full animate-float-${i % 5}`}
+          <div
+            key={i}
+            className={`particle absolute bg-white/30 rounded-full animate-float-${
+              i % 5
+            }`}
             style={{
               width: `${Math.random() * 4 + 1}px`,
               height: `${Math.random() * 4 + 1}px`,
               left: `${Math.random() * 100}%`,
               top: `${Math.random() * 100}%`,
-              animationDelay: `${Math.random() * 5}s`
+              animationDelay: `${Math.random() * 5}s`,
             }}
           />
         ))}
@@ -68,9 +70,23 @@ const Divider = () => (
 
 const LoginForm = () => {
   const [showPassword, setShowPassword] = useState(false);
+  const navigate = useNavigate();
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const formData = new FormData(e.target);
+    const email = formData.get("email");
+    const password = formData.get("password");
+
+    // TODO : Here we'll validate credentials with our backend
+
+    if (email && password) {
+      navigate("/student/dashboard");
+    }
+  };
 
   return (
-    <form action="/login" method="POST" className="flex flex-col gap-4">
+    <form onSubmit={handleSubmit} className="flex flex-col gap-4">
       <input
         type="email"
         name="email"
