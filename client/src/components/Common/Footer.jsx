@@ -11,7 +11,7 @@ import { Link } from "react-router-dom";
 const Logo = () => (
   <Link to="/" className="flex items-center gap-2">
     <img
-      src="/public/logo.png"
+      src="/logo.png"
       alt="NaviQuest Logo"
       className="h-20 w-auto brightness-0 invert"
     />
