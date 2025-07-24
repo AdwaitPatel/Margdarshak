@@ -4,8 +4,8 @@ import CinematicSlider from "./CinematicSlider.jsx";
 const HeroSection = ({
   title = "Quest On Confusion Off",
   description = "Discover your strengths, explore career options, and get personalized guidance from expert mentors to build a successful future.",
-  buttonText = "View Success Stories",
-  buttonLink = "#",
+  buttonText = "Find Career Path",
+  buttonLink = "/career-quiz",
   slides = [
     {
       image:

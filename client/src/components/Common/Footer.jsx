@@ -9,7 +9,7 @@ import {
 import { Link } from "react-router-dom";
 
 const Logo = () => (
-  <Link to="/" className="flex items-center gap-2">
+  <Link to="/" className="flex items-center gap-2 justify-center md:justify-start">
     <img
       src="/public/logo.png"
       alt="NaviQuest Logo"
@@ -24,7 +24,7 @@ const Footer = () => (
     data-aos="fade-up"
   >
     <div className="container mx-auto px-4 grid grid-cols-1 md:grid-cols-4 gap-8">
-      <div className="text-center md:text-left">
+      <div className="text-center md:text-left flex flex-col items-center md:items-start">
         <Logo />
         <p className="opacity-80 max-w-[300px] mx-auto md:mx-0 mt-5">
           From career guidance to personalized mentorship
@@ -35,12 +35,20 @@ const Footer = () => (
           Resources
         </h3>
         <ul>
+          {/* Career Guidance as anchor tag for in-page scroll */}
+          <li className="mb-[12.8px]">
+            <a
+              href="/#margdarshak"
+              className="hover:text-primary dark:hover:text-[var(--color-secondary)] hover:pl-1 transition-all"
+            >
+              Career Guidance
+            </a>
+          </li>
+          {/* The rest as <Link> */}
           {[
-            { name: "Career Guidance", link: "/career-guidance" },
-            { name: "Mentorship", link: "/mentorship" },
+            { name: "Mentorship", link: "/Mentors" },
             { name: "Career Quiz", link: "/career-quiz" },
             { name: "User Strategy", link: "/user-strategy" },
-            { name: "About", link: "/about" },
           ].map(({ name, link }) => (
             <li key={name} className="mb-[12.8px]">
               <Link
@@ -59,11 +67,30 @@ const Footer = () => (
         </h3>
         <ul>
           {[
-            { name: "About NaviQuest", link: "/" },
+            { name: "About NaviQuest", link: "/about" },
             { name: "Contact & Support", link: "/contact" },
-            { name: "Success Stories", link: "/" },
-            { name: "Privacy Policy", link: "/" },
-            {name: "Terms of Service", link: "/terms"},
+          ].map(({ name, link }) => (
+            <li key={name} className="mb-[12.8px]">
+              <Link
+                to={link}
+                className="hover:text-primary dark:hover:text-[var(--color-secondary)] hover:pl-1 transition-all"
+              >
+                {name}
+              </Link>
+            </li>
+          ))}
+          {/* Success Stories as anchor tag for in-page scroll */}
+          <li className="mb-[12.8px]">
+            <a
+              href="/#success-stories"
+              className="hover:text-primary dark:hover:text-[var(--color-secondary)] hover:pl-1 transition-all"
+            >
+              Success Stories
+            </a>
+          </li>
+          {[
+            { name: "Privacy Policy", link: "/privacy-policy" },
+            { name: "Terms of Service", link: "/terms" },
           ].map(({ name, link }) => (
             <li key={name} className="mb-[12.8px]">
               <Link
@@ -117,7 +144,7 @@ const Footer = () => (
         </div>
       </div>
     </div>
-    <div className="text-center mt-8 border-t border-white pt-4 mx-24">
+    <div className="text-center mt-8 border-t border-white pt-4 mx-auto md:mx-24">
       <p>© 2025 NaviQuest. All rights reserved.</p>
     </div>
   </footer>

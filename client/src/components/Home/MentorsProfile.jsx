@@ -1,7 +1,9 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { useNavigate } from 'react-router-dom';
 
 const MentorProfile = ({ mentor, onBackToList }) => {
+  const navigate = useNavigate();
   if (!mentor) {
     return (
       <div className="flex justify-center items-center h-screen bg-[var(--color-bg)] text-[var(--color-text)]">
@@ -122,6 +124,7 @@ const MentorProfile = ({ mentor, onBackToList }) => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.5 }}
                 className="w-full md:w-auto px-8 py-3 bg-[var(--color-primary)] text-white rounded-full hover:bg-[var(--color-accent)] transition-all duration-300 transform hover:-translate-y-1"
+                onClick={() => navigate('/schedule-meeting', { state: { mentor } })}
               >
                 Schedule a Meeting
               </motion.button>

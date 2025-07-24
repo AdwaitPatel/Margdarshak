@@ -14,6 +14,8 @@ import MentorsPage from "./pages/Mentors";
 import Terms from "./pages/Terms";
 import StudentDashboard from "./pages/StudentDashboard";
 import MentorDashboard from "./pages/MentorDashboard.jsx";
+import ScheduleMeeting from "./pages/ScheduleMeeting";
+import About from "./pages/About";
 
 const App = () => {
   return (
@@ -31,6 +33,8 @@ const App = () => {
           <Route path="/Mentors" element={<MentorsPage />} />
           <Route path="/student/dashboard" element={<StudentDashboard />} />
 		  <Route path="/mentor/dashboard" element={<MentorDashboard />}/>
+          <Route path="/schedule-meeting" element={<ScheduleMeeting />} />
+          <Route path="/about" element={<About />} />
 
           <Route
             path="/careers/PCM"
