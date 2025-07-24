@@ -36,5 +36,6 @@ import { studentRouter } from "./routes/student.routes.js";
 
 // routes declaration
 app.use("/api/v1/student", studentRouter);
+// http://localhost:8000/api/v1
 
 export default app;
