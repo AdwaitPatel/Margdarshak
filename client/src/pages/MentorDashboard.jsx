@@ -13,7 +13,7 @@ function MentorDashboard() {
   return (
     <div className="flex">
       <Sidebar />
-      <div className="flex-1 bg-[#0f172a] min-h-screen p-4">
+      <div className="flex-1 bg-[#0f172a] min-h-screen p-0">
         <Routes>
           <Route path="/" element={<Dashboard />} />
           <Route path="/messages" element={<Messages />} />

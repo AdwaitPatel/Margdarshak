@@ -2,6 +2,8 @@ import { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { useTheme } from '../../context/ThemeContext';
 import 'animate.css';
+import Footer from '../Common/Footer';
+import Navbar from '../Common/Navbar';
 
 const Hero = ({ children }) => {
   const { isDarkMode } = useTheme();

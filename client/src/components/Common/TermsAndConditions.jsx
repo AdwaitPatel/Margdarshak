@@ -1,6 +1,84 @@
 const Termscon = () => {
+  // Generate 38 bubbles with random properties
+  const bubbleColors = [
+    'var(--color-primary, #A259FF)',
+    'var(--color-accent, #7B2CBF)',
+    'var(--color-secondary, #9D4EDD)'
+  ];
+  const bubbles = Array.from({ length: 38 }).map((_, i) => {
+    const size = Math.floor(Math.random() * 60) + 60; // 60px to 120px
+    const top = Math.random() * 90; // 0% to 90%
+    const left = Math.random() * 90; // 0% to 90%
+    const color = bubbleColors[Math.floor(Math.random() * bubbleColors.length)];
+    const duration = Math.floor(Math.random() * 20) + 18; // 18s to 38s
+    const keyframe = `bubbleMove${(i % 8) + 1}`;
+    const opacity = 0.08 + Math.random() * 0.12; // 0.08 to 0.2
+    return (
+      <div
+        key={i}
+        className="bubble-animation absolute rounded-full pointer-events-none"
+        style={{
+          width: `${size}px`,
+          height: `${size}px`,
+          background: `radial-gradient(circle at 50% 50%, ${color} 60%, transparent 100%)`,
+          top: `${top}%`,
+          left: `${left}%`,
+          opacity,
+          animation: `${keyframe} ${duration}s linear infinite`,
+          zIndex: 30 // above content box
+        }}
+      />
+    );
+  });
+
   return (
     <div className="min-h-screen relative overflow-hidden bg-[#FFEEFF] text-[#2C2C2C] dark:bg-black dark:text-[#FFEEFF] font-inter p-4 flex items-center justify-center">
+      {/* Animated Bubbles - now above the main content and denser */}
+      <div className="absolute inset-0 w-full h-full z-30 pointer-events-none">
+        {bubbles}
+      </div>
+      <style>{`
+        @keyframes bubbleMove1 {
+          0% { transform: translateY(0) translateX(0); }
+          50% { transform: translateY(40vh) translateX(20vw); }
+          100% { transform: translateY(0) translateX(0); }
+        }
+        @keyframes bubbleMove2 {
+          0% { transform: translateY(0) translateX(0); }
+          50% { transform: translateY(-30vh) translateX(-30vw); }
+          100% { transform: translateY(0) translateX(0); }
+        }
+        @keyframes bubbleMove3 {
+          0% { transform: translateY(0) translateX(0); }
+          50% { transform: translateY(-20vh) translateX(25vw); }
+          100% { transform: translateY(0) translateX(0); }
+        }
+        @keyframes bubbleMove4 {
+          0% { transform: translateY(0) translateX(0); }
+          50% { transform: translateY(30vh) translateX(-15vw); }
+          100% { transform: translateY(0) translateX(0); }
+        }
+        @keyframes bubbleMove5 {
+          0% { transform: translateY(0) translateX(0); }
+          50% { transform: translateY(-25vh) translateX(10vw); }
+          100% { transform: translateY(0) translateX(0); }
+        }
+        @keyframes bubbleMove6 {
+          0% { transform: translateY(0) translateX(0); }
+          50% { transform: translateY(15vh) translateX(-20vw); }
+          100% { transform: translateY(0) translateX(0); }
+        }
+        @keyframes bubbleMove7 {
+          0% { transform: translateY(0) translateX(0); }
+          50% { transform: translateY(-10vh) translateX(30vw); }
+          100% { transform: translateY(0) translateX(0); }
+        }
+        @keyframes bubbleMove8 {
+          0% { transform: translateY(0) translateX(0); }
+          50% { transform: translateY(20vh) translateX(-10vw); }
+          100% { transform: translateY(0) translateX(0); }
+        }
+      `}</style>
       {/* Top Right Circle */}
       <div className="absolute top-[-80px] right-[-80px] w-[300px] h-[300px] bg-gradient-to-br from-purple-400/30 to-purple-600/40 rounded-full opacity-40"></div>
       {/* Bottom Left Circle */}
@@ -10,7 +88,7 @@ const Termscon = () => {
       <div className="absolute bottom-0 left-0 w-[300px] h-[300px] bg-[#A259FF]/15 rounded-full -z-10"></div>
 
       {/* Main content container for the terms and conditions */}
-      <div className="max-w-4xl w-full mx-auto p-6 md:p-8 lg:p-10 bg-white dark:bg-gray-800 rounded-lg shadow-xl relative z-10">
+      <div className="max-w-4xl w-full mx-auto p-6 md:p-8 lg:p-10 bg-white dark:bg-gray-800 rounded-lg shadow-xl relative z-20">
         <h1 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-center mb-8 text-[#A259FF] dark:text-[#9D4EDD]">
           Terms and Conditions
         </h1>

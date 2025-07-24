@@ -16,7 +16,12 @@ const Sidebar = ({ sidebarOpen, selectedTab, setSelectedTab }) => {
     <div
       className={`${
         sidebarOpen ? 'w-64' : 'w-0'
-      } transition-all duration-300 ease-in-out overflow-hidden border-r border-gray-200/10 bg-gray-900 text-white font-sans`}
+      } transition-all duration-300 ease-in-out overflow-hidden font-sans`}
+      style={{ 
+        background: 'var(--color-bg)',
+        borderRight: '1px solid var(--color-secondary)',
+        boxShadow: '2px 0 4px rgba(var(--color-primary), 0.1)'
+      }}
     >
       <div className="w-64 p-4">
         {/* Search */}
@@ -29,19 +34,24 @@ const Sidebar = ({ sidebarOpen, selectedTab, setSelectedTab }) => {
               onChange={(e) => setSearchQuery(e.target.value)}
               onFocus={() => setSearchFocused(true)}
               onBlur={() => setSearchFocused(false)}
-              className={`w-full pl-10 pr-4 py-2 rounded bg-gray-800 text-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-600 ${
-                searchFocused ? 'border-blue-600' : 'border-gray-200/10'
-              }`}
+              className="w-full pl-10 pr-4 py-2 rounded transition-all duration-300"
+              style={{ 
+                background: 'var(--color-bg)',
+                color: 'var(--color-text)',
+                border: `2px solid ${searchFocused ? 'var(--color-primary)' : 'var(--color-secondary)'}`,
+                boxShadow: searchFocused ? '0 0 0 2px rgba(var(--color-primary), 0.1)' : 'none'
+              }}
             />
             <button
-              className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-blue-500 transition-colors"
+              className="absolute left-3 top-1/2 transform -translate-y-1/2 transition-all duration-300"
               onClick={() => {
                 console.log('Search clicked:', searchQuery);
               }}
+              style={{ 
+                color: searchFocused ? 'var(--color-primary)' : 'var(--color-secondary)'
+              }}
             >
-              <Search
-                className={`w-4 h-4 ${searchFocused ? 'text-blue-500' : 'text-gray-400'}`}
-              />
+              <Search className="w-4 h-4" />
             </button>
           </div>
         </div>
@@ -55,11 +65,15 @@ const Sidebar = ({ sidebarOpen, selectedTab, setSelectedTab }) => {
               <button
                 key={item.name}
                 onClick={() => setSelectedTab(item.name)}
-                className={`w-full text-left px-4 py-3 rounded transition-colors flex items-center space-x-3 ${
-                  isSelected
-                    ? 'bg-blue-600 text-white'
-                    : 'text-gray-400 hover:bg-gray-800'
+                className={`w-full text-left px-4 py-3 rounded transition-all duration-300 flex items-center space-x-3 transform hover:scale-[1.02] ${
+                  isSelected ? 'shadow-md' : ''
                 }`}
+                style={{ 
+                  background: isSelected ? 'var(--color-primary)' : 'var(--color-bg)',
+                  color: isSelected ? 'var(--color-bg)' : 'var(--color-text)',
+                  border: `1px solid ${isSelected ? 'var(--color-primary)' : 'var(--color-secondary)'}`,
+                  boxShadow: isSelected ? '0 2px 4px rgba(var(--color-primary), 0.2)' : 'none'
+                }}
               >
                 <Icon className="w-5 h-5" />
                 <span>{item.name}</span>

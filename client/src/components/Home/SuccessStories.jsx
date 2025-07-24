@@ -52,6 +52,7 @@ const SuccessStories = () => {
 
   return (
     <section
+      id="success-stories"
       className="py-20 bg-bg relative overflow-hidden transition-all duration-1000"
       data-aos="fade-up"
     >

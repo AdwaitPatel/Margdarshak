@@ -122,6 +122,7 @@ const Mentorship = () => {
 
   return (
     <section
+      id="margdarshak"
       className="min-h-screen dark:text-white py-8 sm:py-12 md:py-20 bg-bg transition-all duration-1000"
       data-aos="fade-up"
     >
