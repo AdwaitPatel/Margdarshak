@@ -1,6 +1,9 @@
 import express from "express";
 import cors from "cors";
+import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
+
+dotenv.config();
 
 const app = express();
 
@@ -32,10 +35,11 @@ app.use(express.static("public"));
 app.use(cookieParser());
 
 // routes import
-import { studentRouter } from "./routes/student.routes.js";
+import { userRouter } from "./routes/user.routes.js";
+import { authRouter } from "./routes/auth.routes.js";
 
 // routes declaration
-app.use("/api/v1/student", studentRouter);
-// http://localhost:8000/api/v1
+app.use("/api/v1/auth", authRouter);
+app.use("/api/v1/user", userRouter);
 
 export default app;

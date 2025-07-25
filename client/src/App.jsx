@@ -5,9 +5,9 @@ import Tenth from "./pages/10th.jsx";
 import Home from "./pages/Home.jsx";
 import Contact from "./pages/Contact";
 import CareerQuizPage from "./pages/CareerQuiz";
-import SignupPage from "./pages/Signup";
-import LoginPage from "./pages/Login";
-import ForgotPasswordPage from "./pages/ForgotPassword";
+import SignupPage from "./pages/Auth/Signup.jsx";
+import LoginPage from "./pages/Auth/Login.jsx";
+import ForgotPasswordPage from "./pages/Auth/ForgotPassword.jsx";
 import CareerDomainsPage from "./pages/CareerDomains";
 import ScrollToTop from "./components/Common/ScrollToTop.jsx";
 import MentorsPage from "./pages/Mentors";
@@ -32,7 +32,7 @@ const App = () => {
           <Route path="/forgot-password" element={<ForgotPasswordPage />} />
           <Route path="/Mentors" element={<MentorsPage />} />
           <Route path="/student/dashboard" element={<StudentDashboard />} />
-		  <Route path="/mentor/dashboard" element={<MentorDashboard />}/>
+          <Route path="/mentor/dashboard" element={<MentorDashboard />} />
           <Route path="/schedule-meeting" element={<ScheduleMeeting />} />
           <Route path="/about" element={<About />} />
 

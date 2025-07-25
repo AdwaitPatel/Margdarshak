@@ -1,5 +1,5 @@
 
-import ForgotPassword from '../components/Auth/ForgotPassword';
+import ForgotPassword from '../../components/Auth/ForgotPassword';
 
 const ForgotPasswordPage = () => {
   return (

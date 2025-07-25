@@ -8,7 +8,7 @@ import Streams from "../components/Home/Streams";
 import FAQ from "../components/Home/FAQ";
 import Footer from "../components/Common/Footer";
 import React, { useState, useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 const Home = () => {
   const location = useLocation();
@@ -40,8 +40,8 @@ const Home = () => {
       <FAQ />
       <Footer />
       {/* Floating 1:1 Margdarshak Button */}
-      <a
-        href="/Mentors"
+      <Link
+        to="/Mentors"
         className={`fixed right-4 bottom-24 z-50 flex items-center gap-2 px-0 py-0 rounded-full shadow-xl font-semibold text-base md:text-lg transition-all duration-300
           bg-[var(--color-primary)] text-white hover:bg-[var(--color-accent)]
           dark:bg-[var(--color-accent)] dark:text-white dark:hover:bg-[var(--color-primary)]
@@ -66,7 +66,7 @@ const Home = () => {
           <path strokeLinecap="round" strokeLinejoin="round" d="M12 11c0-1.657 1.343-3 3-3s3 1.343 3 3-1.343 3-3 3-3-1.343-3-3zm-6 8v-1a4 4 0 014-4h4a4 4 0 014 4v1" />
         </svg>
         <span className={`relative z-10 ml-2 transition-all duration-300 ${floatExpanded ? 'opacity-100 w-auto' : 'opacity-0 w-0'} whitespace-nowrap`}>1:1 Margdarshak</span>
-      </a>
+      </Link>
       <style>{`
         @media (max-width: 640px) {
           .animate-float {

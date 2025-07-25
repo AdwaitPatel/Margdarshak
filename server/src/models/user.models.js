@@ -1,37 +1,21 @@
-/*
-mentor {
-  fullName string
-  email string
-  password string
-  profilePicture string
-  specialization string            // e.g. "Computer Science"
-  experience number               // e.g. 15 (years)
-  bio string 
-  phone number
-  googleId string
-  refreshToken string
-
-  createdAt Date
-  updatedAt Date
-}
-*/
-
-import mongoose from "mongoose";
+import mongoose, { Aggregate } from "mongoose";
 import mongooseAggregatePaginate from "mongoose-aggregate-paginate-v2";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 
-const mentorSchema = new mongoose.Schema(
+const userSchema = new mongoose.Schema(
     {
-        fullname: {
+        // common fields for mentor and student
+        fullName: {
             type: String,
-            default: "Mentor",
+            trim: true,
         },
         email: {
             type: String,
             required: true,
             unique: true,
             lowercase: true,
+            trim: true,
         },
         password: {
             type: String,
@@ -40,8 +24,26 @@ const mentorSchema = new mongoose.Schema(
         profilePicture: {
             type: String,
             default:
-                "https://i.pinimg.com/736x/d1/7a/42/d17a4280ffd64c0c347bee97a8f2c91e.jpg",
+                "https://cdn-icons-png.freepik.com/512/3135/3135755.png?ga=GA1.1.424641006.1750279238",
         },
+        phone: {
+            type: Number,
+            trim: true,
+        },
+        googleId: {
+            type: String,
+        },
+        refreshToken: {
+            type: String,
+        },
+
+        role: {
+            type: String,
+            enum: ["admin", "mentor", "student"],
+            default: "student",
+        },
+
+        // mentor fields
         specialization: {
             type: String,
         },
@@ -51,15 +53,11 @@ const mentorSchema = new mongoose.Schema(
         bio: {
             type: String,
         },
-        phone: {
+        isFreeSession: {
+            type: Boolean,
+        },
+        sessionPrice: {
             type: Number,
-        },
-        googleId: {
-            type: String,
-            unique: true,
-        },
-        refreshToken: {
-            type: String,
         },
     },
     {
@@ -67,19 +65,21 @@ const mentorSchema = new mongoose.Schema(
     }
 );
 
-mentorSchema.pre("save", async function (next) {
+// preHook is used before saving the info in DB
+// encrypt the password before saving in DB
+userSchema.pre("save", async function (next) {
     if (!this.isModified("password")) return next();
 
     this.password = await bcrypt.hash(this.password, 10);
     next();
 });
 
-mentorSchema.methods.isPasswordCorrect = async function (password) {
+userSchema.methods.isPasswordCorrect = async function (password) {
     return bcrypt.compare(password, this.password);
 };
 
 // ACCESS TOKEN
-mentorSchema.methods.generateAccessToken = function () {
+userSchema.methods.generateAccessToken = function () {
     return jwt.sign(
         {
             // payloads
@@ -94,7 +94,7 @@ mentorSchema.methods.generateAccessToken = function () {
     );
 };
 // REFRESH TOKEN
-mentorSchema.methods.generateRefreshToken = function () {
+userSchema.methods.generateRefreshToken = function () {
     return jwt.sign(
         {
             // payloads
@@ -107,6 +107,6 @@ mentorSchema.methods.generateRefreshToken = function () {
     );
 };
 
-mentorSchema.plugin(mongooseAggregatePaginate);
+userSchema.plugin(mongooseAggregatePaginate);
 
-export const Mentor = mongoose.model("Mentor", mentorSchema);
+export const User = mongoose.model("User", userSchema);
