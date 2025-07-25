@@ -1,5 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
+import api from "../../api";
 
 const Card = ({ children }) => (
   <div className="min-h-screen flex items-center justify-center relative overflow-hidden bg-[#0a0a0a]">
@@ -71,13 +72,46 @@ const Divider = () => (
 const SignupForm = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Add your signup logic here (API call, validation, etc.)
-    // For now, we'll just navigate to the student dashboard
-    navigate("/student/dashboard");
+    setLoading(true);
+
+    // Get form data
+    const formData = new FormData(e.target);
+    const email = formData.get("email");
+    const password = formData.get("password");
+    const confirmPassword = formData.get("confirm-password");
+
+    try {
+      // Make API call to signup endpoint
+      const response = await api.post("/auth/signup", {
+        email,
+        password,
+        confirmPassword,
+        role: "student", // Default role for signup
+      });
+
+      // Handle successful signup
+      console.log("Signup successful:", response.data);
+
+      // Show success message and redirect to login
+      alert("Account created successfully! Please login to continue.");
+      navigate("/login");
+    } catch (error) {
+      console.error("Signup error:", error);
+
+      // Handle errors
+      if (error.response?.data?.message) {
+        alert(error.response.data.message);
+      } else {
+        alert("Something went wrong during signup. Please try again.");
+      }
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -139,9 +173,10 @@ const SignupForm = () => {
       </div>
       <button
         type="submit"
-        className="w-full py-3 bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-secondary)] border-none rounded-lg text-white font-medium text-base hover:opacity-90 transition-all duration-300 shadow-lg shadow-[var(--color-primary)]/20"
+        disabled={loading}
+        className="w-full py-3 bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-secondary)] border-none rounded-lg text-white font-medium text-base hover:opacity-90 transition-all duration-300 shadow-lg shadow-[var(--color-primary)]/20 disabled:opacity-50 disabled:cursor-not-allowed"
       >
-        SignUp
+        {loading ? "Signing Up..." : "SignUp"}
       </button>
     </form>
   );

@@ -1,5 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { jwtDecode } from "jwt-decode";
+import api from "../../api";
 
 const Card = ({ children }) => (
   <div className="min-h-screen flex items-center justify-center relative overflow-hidden bg-[#0a0a0a]">
@@ -70,18 +72,64 @@ const Divider = () => (
 
 const LoginForm = () => {
   const [showPassword, setShowPassword] = useState(false);
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
+
     const formData = new FormData(e.target);
     const email = formData.get("email");
     const password = formData.get("password");
 
-    // TODO : Here we'll validate credentials with our backend
+    try {
+      const response = await api.post("/auth/login", {
+        email,
+        password,
+      });
 
-    if (email && password) {
-      navigate("/student/dashboard");
+      console.log("Login successful:", response.data);
+
+      // Store the token in localStorage
+      if (response.data.token) {
+        localStorage.setItem("authToken", response.data.token);
+
+        // Decode JWT to get user role
+        try {
+          const decodedToken = jwtDecode(response.data.token);
+          console.log("Decoded token:", decodedToken);
+
+          // Navigate based on user role
+          if (decodedToken.role === "mentor") {
+            navigate("/mentor/dashboard");
+          } else if (decodedToken.role === "student") {
+            navigate("/");
+          } else if (decodedToken.role === "admin") {
+            navigate("/admin/dashboard");
+          } else {
+            // Default fallback to student dashboard
+            navigate("/student/dashboard");
+          }
+        } catch (decodeError) {
+          console.error("Error decoding token:", decodeError);
+          // Fallback to student dashboard if token decode fails
+          navigate("/student/dashboard");
+        }
+      } else {
+        throw new Error("No token received from server");
+      }
+    } catch (error) {
+      console.error("Login error:", error);
+
+      // Handle errors
+      if (error.response?.data?.message) {
+        alert(error.response.data.message);
+      } else {
+        alert("Something went wrong during login. Please try again.");
+      }
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -135,9 +183,10 @@ const LoginForm = () => {
       </div>
       <button
         type="submit"
-        className="w-full py-3 bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-secondary)] border-none rounded-lg text-white font-medium text-base hover:opacity-90 transition-all duration-300 shadow-lg shadow-[var(--color-primary)]/20"
+        disabled={loading}
+        className="w-full py-3 bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-secondary)] border-none rounded-lg text-white font-medium text-base hover:opacity-90 transition-all duration-300 shadow-lg shadow-[var(--color-primary)]/20 disabled:opacity-50 disabled:cursor-not-allowed"
       >
-        Login
+        {loading ? "Logging in..." : "Login"}
       </button>
     </form>
   );
