@@ -16,6 +16,10 @@ import StudentDashboard from "./pages/StudentDashboard";
 import MentorDashboard from "./pages/MentorDashboard.jsx";
 import ScheduleMeeting from "./pages/ScheduleMeeting";
 import About from "./pages/About";
+import ProtectedRoute from "./components/ProtectedRoute";
+import Unauthorized from "./pages/Unauthorized";
+import NotFound from "./pages/NotFound";
+import AIAssistant from "./components/AI/AIAssistant.jsx";
 
 const App = () => {
   return (
@@ -23,6 +27,7 @@ const App = () => {
       <Router>
         <ScrollToTop />
         <Routes>
+          {/* Public Routes */}
           <Route path="/" element={<Home />} />
           <Route path="course-core/10th" element={<Tenth />} />
           <Route path="/contact" element={<Contact />} />
@@ -31,11 +36,37 @@ const App = () => {
           <Route path="/login" element={<LoginPage />} />
           <Route path="/forgot-password" element={<ForgotPasswordPage />} />
           <Route path="/Mentors" element={<MentorsPage />} />
-          <Route path="/student/dashboard" element={<StudentDashboard />} />
-          <Route path="/mentor/dashboard" element={<MentorDashboard />} />
-          <Route path="/schedule-meeting" element={<ScheduleMeeting />} />
           <Route path="/about" element={<About />} />
+          <Route path="/terms" element={<Terms />} />
+          <Route path="/unauthorized" element={<Unauthorized />} />
 
+          {/* Protected Routes */}
+          <Route
+            path="/student/dashboard"
+            element={
+              <ProtectedRoute allowedRoles={["student", "admin"]}>
+                <StudentDashboard />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/mentor/dashboard"
+            element={
+              <ProtectedRoute allowedRoles={["mentor", "admin"]}>
+                <MentorDashboard />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/schedule-meeting"
+            element={
+              <ProtectedRoute allowedRoles={["student", "mentor", "admin"]}>
+                <ScheduleMeeting />
+              </ProtectedRoute>
+            }
+          />
+
+          {/* Career Domain Routes (Public) */}
           <Route
             path="/careers/PCM"
             element={<CareerDomainsPage stream="PCM" />}
@@ -52,8 +83,13 @@ const App = () => {
             path="/careers/Commerce"
             element={<CareerDomainsPage stream="Commerce" />}
           />
-          <Route path="/terms" element={<Terms />} />
+
+          {/* 404 Catch-all Route - Must be last */}
+          <Route path="*" element={<NotFound />} />
         </Routes>
+
+        {/* AI Assistant - Available on all pages */}
+        <AIAssistant />
       </Router>
     </ThemeProvider>
   );
