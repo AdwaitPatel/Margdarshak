@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import { log } from "../utils/logger.js";
 
 // async functions always returns a promise
 const connectDB = async () => {
@@ -7,11 +8,11 @@ const connectDB = async () => {
             `${process.env.MONGODB_URI}/${process.env.DB_NAME}`
         );
 
-        console.log(
-            `\n ✅ MongoDB connected!! DB HOST : ${connectionInstance.connection.host} Cluster : ${connectionInstance.connection.name}`
+        log.success(
+            `MongoDB connected!! DB HOST : ${connectionInstance.connection.host} Cluster : ${connectionInstance.connection.name}`
         );
     } catch (error) {
-        console.log("MongoDB connection error", error);
+        log.error("MongoDB connection error", error);
         process.exit(1);
     }
 };

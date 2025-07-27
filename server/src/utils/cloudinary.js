@@ -1,8 +1,9 @@
 import { v2 as cloudinary } from "cloudinary";
 import fs from "fs";
-import dotenv from "dotenv"
+import dotenv from "dotenv";
+import { log } from "./logger.js";
 
-dotenv.config()
+dotenv.config();
 
 cloudinary.config({
     cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
@@ -20,13 +21,13 @@ const uploadOnCloudinary = async (localFilePath) => {
         });
 
         // file is uploaded on cloudinary and remove it from server
-        console.log("File is uploaded => ", response.url);
+        log.success("File is uploaded => ", response.url);
 
         fs.unlinkSync(localFilePath);
 
         return response;
     } catch (error) {
-        console.log("Error while uploading on Cloudinary ", error);
+        log.error("Error while uploading on Cloudinary ", error);
 
         fs.unlinkSync(localFilePath); // remove the locally saved temp file if upload fails
 

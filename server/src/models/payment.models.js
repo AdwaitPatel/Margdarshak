@@ -1,23 +1,3 @@
-/*
-payment {
-  studentId string fk
-  mentorId string fk
-  meetingId string fk
-  razorpayPaymentId string 
-  razorpayOrderId string   
-  razorpaySignature string  // Razorpay signature (for verification)
-  amount number
-  currency string  // "INR"
-  name string // student
-  phone string  // student
-  status enum("created", "successful", "failed", "refunded")
-  paid boolean
-
-  createdAt DateTime
-  updatedAt DateTime
-}
-*/
-
 import mongoose from "mongoose";
 
 const paymentSchema = new mongoose.Schema(

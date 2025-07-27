@@ -15,7 +15,18 @@ const registerUser = async (req, res) => {
     // return res
 
     try {
-        const { email, password, confirmPassword, role } = req.body;
+        const {
+            email,
+            password,
+            confirmPassword,
+            role,
+            fullName,
+            phone,
+            specialization,
+            experience,
+            bio,
+            isFreeSession,
+        } = req.body;
 
         if (role) {
             if (
@@ -71,6 +82,12 @@ const registerUser = async (req, res) => {
             email: email,
             password: password,
             role: role,
+            fullName,
+            phone,
+            specialization,
+            experience,
+            bio,
+            isFreeSession,
         });
 
         const createdUser = await User.findById(user._id).select(
@@ -117,8 +134,8 @@ const loginUser = async (req, res) => {
 
         const token = jwt.sign(
             { id: existedUser._id, role: existedUser.role },
-            process.env.ACCESS_TOKEN_SECRET,
-            { expiresIn: process.env.ACCESS_TOKEN_EXPIRY }
+            process.env.JWT_SECRET,
+            { expiresIn: process.env.JWT_EXPIRY }
         );
 
         res.status(200).json({

@@ -100,17 +100,6 @@ chatSessionSchema.statics.createSession = function (sessionId, userId = null) {
     });
 };
 
-// Static method to cleanup old sessions
-chatSessionSchema.statics.cleanupOldSessions = function () {
-    const cutoffDate = new Date();
-    cutoffDate.setDate(cutoffDate.getDate() - 30); // 30 days ago
-
-    return this.deleteMany({
-        createdAt: { $lt: cutoffDate },
-        userId: null, // Only cleanup anonymous sessions
-    });
-};
-
 // Static methods for ChatMessage functionality
 chatMessageSchema.statics.createMessage = async function (
     sessionId,
@@ -125,11 +114,9 @@ chatMessageSchema.statics.createMessage = async function (
             throw new Error(`Chat session ${sessionId} not found`);
         }
 
-        // Add message to session
         const newMessage = { role, content, timestamp: new Date() };
         session.messages.push(newMessage);
 
-        // Auto-generate title from first user message
         if (
             session.messages.length === 2 &&
             session.title === "New Chat" &&
@@ -175,23 +162,6 @@ chatMessageSchema.statics.getMessagesBySession = async function (
         }));
     } catch (error) {
         throw new Error(`Failed to get messages: ${error.message}`);
-    }
-};
-
-// Add static method to delete messages by session
-chatMessageSchema.statics.deleteMany = async function (query) {
-    try {
-        if (query.sessionId) {
-            // Clear messages from the session
-            const result = await ChatSession.updateOne(
-                { sessionId: query.sessionId },
-                { $set: { messages: [] } }
-            );
-            return result;
-        }
-        return { deletedCount: 0 };
-    } catch (error) {
-        throw new Error(`Failed to delete messages: ${error.message}`);
     }
 };
 
