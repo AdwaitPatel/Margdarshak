@@ -25,9 +25,37 @@ const AIAssistant = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   };
 
-  //   useEffect(() => {
-  //     scrollToBottom();
-  //   }, [messages]);
+  // Auto-scroll to show the beginning of new messages
+  const scrollToNewMessage = () => {
+    // Only scroll when there are messages and we're not at the very beginning
+    if (messages.length > 0) {
+      const messagesContainer = messagesEndRef.current?.parentElement;
+      if (messagesContainer) {
+        // Get the last message element
+        const lastMessageIndex = messages.length - 1;
+        const lastMessageElement = messagesContainer.children[lastMessageIndex];
+
+        if (lastMessageElement) {
+          // Scroll to show the beginning of the last message with some padding
+          lastMessageElement.scrollIntoView({
+            behavior: "smooth",
+            block: "start", // This ensures we scroll to the top of the message
+          });
+        }
+      }
+    }
+  };
+
+  useEffect(() => {
+    // Only auto-scroll when a new message is added and it's from the assistant
+    if (messages.length > 0) {
+      const lastMessage = messages[messages.length - 1];
+      // Scroll when assistant responds or when user sends a message
+      if (lastMessage.role === "assistant" || lastMessage.role === "user") {
+        setTimeout(() => scrollToNewMessage(), 100); // Small delay to ensure DOM is updated
+      }
+    }
+  }, [messages]);
 
   // Initialize chat session
   const initializeSession = async () => {

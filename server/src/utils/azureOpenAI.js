@@ -4,18 +4,15 @@ import {
     getBearerTokenProvider,
 } from "@azure/identity";
 import dotenv from "dotenv";
+import { log } from "./logger.js";
 
 dotenv.config();
 
 export class AzureOpenAIService {
     constructor() {
-        this.endpoint =
-            process.env.AZURE_OPENAI_ENDPOINT ||
-            "https://ai-adwaitpatelcs239999ai963817250029.openai.azure.com/";
-        this.deploymentName =
-            process.env.AZURE_OPENAI_DEPLOYMENT_NAME || "gpt-4";
-        this.apiVersion =
-            process.env.AZURE_OPENAI_API_VERSION || "2025-01-01-preview";
+        this.endpoint = process.env.AZURE_OPENAI_ENDPOINT;
+        this.deploymentName = process.env.AZURE_OPENAI_DEPLOYMENT_NAME;
+        this.apiVersion = process.env.AZURE_OPENAI_API_VERSION;
 
         if (!this.endpoint || !this.deploymentName) {
             const missing = [];
@@ -44,9 +41,7 @@ export class AzureOpenAIService {
                 deployment: this.deploymentName,
             });
 
-            console.log(
-                "Azure OpenAI client configured"
-            );
+            log.info("Azure OpenAI client configured");
         } catch (error) {
             console.error("Failed to configure Azure OpenAI client:", error);
             throw new Error(
@@ -74,9 +69,8 @@ export class AzureOpenAIService {
 
     async generateResponse(message, conversationHistory = []) {
         try {
-            console.log(
-                "Generating AI response for message:",
-                message.substring(0, 50) + "..."
+            log.info(
+                `Generating AI response for message: ${message.substring(0, 50)}...`
             );
 
             const messages = [

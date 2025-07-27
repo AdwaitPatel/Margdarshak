@@ -1,43 +1,29 @@
 import { Router } from "express";
-import { registerUser } from "../controllers/auth.controllers.js";
-import { upload } from "../middlewares/multer.middlewares.js";
 import verifyToken from "../middlewares/auth.middlewares.js";
 import authorizeRoles from "../middlewares/role.middlewares.js";
+import { studentRouter } from "./student.routes.js";
+import { adminRouter } from "./admin.routes.js";
+import { mentorRouter } from "./mentor.routes.js";
 
 const userRouter = Router();
 
-// Todo : use this for 1:1 form
-// studentRouter.route("/signup").post(
-// 	upload.single("profilePicture"),
-// 	registerStudent
-// );
-
 // only admin can access
-userRouter
-    .route("/admin")
-    .get(verifyToken, authorizeRoles("admin"), (req, res) => {
-        res.json({
-            message: "Welcome admin",
-        });
-    });
+userRouter.use("/admin", verifyToken, authorizeRoles("admin"), adminRouter);
 
 // only admin and mentor can access
-userRouter
-    .route("/mentor")
-    .get(verifyToken, authorizeRoles("admin", "mentor"), (req, res) => {
-        res.json({
-            message: "Welcome mentor",
-        });
-    });
+userRouter.use(
+    "/mentor",
+    verifyToken,
+    authorizeRoles("admin", "mentor"),
+    mentorRouter
+);
 
 // only admin and student can access
-userRouter
-    .route("/student")
-    .get(verifyToken, authorizeRoles("admin", "student"), (req, res) => {
-        res.json({
-            message: "Welcome student",
-        });
-    });
-// mahak task => add a route for form only in studentRouter
+userRouter.use(
+    "/student",
+    verifyToken,
+    authorizeRoles("admin", "student"),
+    studentRouter
+);
 
 export { userRouter };
