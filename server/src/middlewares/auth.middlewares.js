@@ -5,6 +5,7 @@ const verifyToken = (req, res, next) => {
     let authHeader = req.headers.authorization;
 
     if (authHeader && authHeader.startsWith("Bearer")) {
+        //Bearer abcd1234 => ["bearer","abcd1234"]
         token = authHeader.split(" ")[1];
 
         if (!token) {

@@ -3,6 +3,7 @@ import { registerUser } from "../controllers/auth.controllers.js";
 import { upload } from "../middlewares/multer.middlewares.js";
 import verifyToken from "../middlewares/auth.middlewares.js";
 import authorizeRoles from "../middlewares/role.middlewares.js";
+import { studentRouter } from "./student.routes.js";
 
 const userRouter = Router();
 
@@ -33,11 +34,7 @@ userRouter
 // only admin and student can access
 userRouter
     .route("/student")
-    .get(verifyToken, authorizeRoles("admin", "student"), (req, res) => {
-        res.json({
-            message: "Welcome student",
-        });
-    });
+    .get(verifyToken, authorizeRoles("admin", "student"), studentRouter);
 // mahak task => add a route for form only in studentRouter
 
 export { userRouter };
