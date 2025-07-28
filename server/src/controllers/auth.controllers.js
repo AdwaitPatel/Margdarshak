@@ -1,19 +1,8 @@
 import jwt from "jsonwebtoken";
 import { User } from "../models/user.models.js";
 import bcrypt from "bcrypt";
-// import { uploadOnCloudinary } from "../utils/cloudinary.js";
 
 const registerUser = async (req, res) => {
-    // get user details from frontend
-    // validation - not empty
-    // check if user already exists via email
-    // check for images like profilePicture
-    // upload them to cloudinary
-    // create user object - create entry in DB
-    // remove password and refreshToken field from response
-    // check for user creation
-    // return res
-
     try {
         const {
             email,
@@ -60,28 +49,10 @@ const registerUser = async (req, res) => {
             return res.status(400).json({ message: "Passwords don't match" });
         }
 
-        // Todo : use this for 1:1 form
-
-        // get the profile picture path
-        // const profileLocalPath = req.file?.path;
-
-        // if (!profileLocalPath) {
-        //     throw new ApiError(400, "profile picture is required");
-        // }
-
-        // const profilePic = await uploadOnCloudinary(profileLocalPath);
-
-        // if (!profilePic) {
-        //     throw new ApiError(500, "Error while uploading profile picture");
-        // }
-
-        // fullName,
-        // profilePicture: profilePic.url,
-
         const user = await User.create({
-            email: email,
-            password: password,
-            role: role,
+            email,
+            password,
+            role,
             fullName,
             phone,
             specialization,
@@ -101,6 +72,7 @@ const registerUser = async (req, res) => {
         }
 
         return res.status(201).json({
+            success: true,
             message: "User has registered successfully.",
             data: createdUser,
         });
@@ -139,6 +111,8 @@ const loginUser = async (req, res) => {
         );
 
         res.status(200).json({
+            success: true,
+            message: "User logged in succesfully",
             token,
         });
     } catch (error) {

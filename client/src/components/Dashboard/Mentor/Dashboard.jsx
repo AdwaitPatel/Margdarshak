@@ -8,17 +8,12 @@ import {
   FaComments,
   FaLightbulb,
   FaBars,
-  FaTimes,
-  FaHome,
-  FaCog,
-  FaSignOutAlt,
   FaSun,
   FaMoon,
 } from "react-icons/fa";
 import { FiUser } from "react-icons/fi";
 
-function Dashboard() {
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+function Dashboard({ mentorName, toggleSidebar }) {
   const [isProfileOpen, setIsProfileOpen] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(false);
   const navigate = useNavigate();
@@ -52,132 +47,11 @@ function Dashboard() {
     }
   };
 
-  // Close sidebar when clicking outside
-  useEffect(() => {
-    const handleClickOutside = (e) => {
-      if (
-        isSidebarOpen &&
-        !e.target.closest(".sidebar") &&
-        !e.target.closest(".sidebar-toggle")
-      ) {
-        setIsSidebarOpen(false);
-      }
-    };
-
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, [isSidebarOpen]);
-
-  // Navigation items
-  const navItems = [
-    { icon: <FaHome className="text-xl" />, label: "Dashboard", link: "#" },
-    {
-      icon: <FaCalendarAlt className="text-xl" />,
-      label: "Calendar",
-      link: "#",
-    },
-    { icon: <FaComments className="text-xl" />, label: "Messages", link: "#" },
-    { icon: <FaCog className="text-xl" />, label: "Settings", link: "#" },
-  ];
-
   return (
     <div
-      className="min-h-screen font-sans relative"
+      className="min-h-screen font-sans"
       style={{ background: "var(--color-bg)", color: "var(--color-text)" }}
     >
-      {/* Hamburger Menu Button */}
-      <button
-        onClick={() => setIsSidebarOpen(!isSidebarOpen)}
-        className="sidebar-toggle fixed top-4 left-4 z-50 p-2 rounded-lg md:hidden transition-all duration-300 transform hover:scale-105"
-        style={{
-          background: "var(--color-primary)",
-          color: "var(--color-bg)",
-          boxShadow: "0 2px 4px rgba(var(--color-primary), 0.2)",
-        }}
-      >
-        {isSidebarOpen ? (
-          <FaTimes className="text-xl" />
-        ) : (
-          <FaBars className="text-xl" />
-        )}
-      </button>
-
-      {/* Mobile Sidebar */}
-      <div
-        className={`sidebar fixed md:hidden top-0 left-0 h-full w-64 z-40 transition-transform duration-300 transform ${
-          isSidebarOpen ? "translate-x-0" : "-translate-x-full"
-        }`}
-        style={{
-          background: "var(--color-bg)",
-          borderRight: "1px solid var(--color-secondary)",
-          boxShadow: "2px 0 4px rgba(var(--color-primary), 0.1)",
-        }}
-      >
-        <div className="p-4">
-          {/* Profile Section */}
-          <div className="flex flex-col items-center mb-8 pt-12">
-            <div className="relative">
-              <img
-                src="https://randomuser.me/api/portraits/men/75.jpg"
-                alt="Mentor"
-                className="w-20 h-20 rounded-full shadow-lg transition-transform duration-300 transform hover:scale-105"
-                style={{
-                  border: "4px solid var(--color-primary)",
-                  boxShadow: "0 2px 4px rgba(var(--color-primary), 0.2)",
-                }}
-              />
-              <div
-                className="absolute bottom-0 right-0 w-4 h-4 rounded-full"
-                style={{
-                  background: "var(--color-accent)",
-                  border: "2px solid var(--color-bg)",
-                }}
-              ></div>
-            </div>
-            <h2
-              className="mt-3 text-lg font-semibold"
-              style={{ color: "var(--color-primary)" }}
-            >
-              Hardik Singh
-            </h2>
-            <p className="text-sm" style={{ color: "var(--color-secondary)" }}>
-              Mentor
-            </p>
-          </div>
-
-          {/* Navigation */}
-          <nav className="space-y-2">
-            {navItems.map((item, index) => (
-              <a
-                key={index}
-                href={item.link}
-                className="flex items-center gap-3 px-4 py-3 rounded-lg transition-all duration-300 transform hover:scale-[1.02]"
-                style={{
-                  background: "var(--color-bg)",
-                  border: "1px solid var(--color-secondary)",
-                  color: "var(--color-text)",
-                }}
-              >
-                {item.icon}
-                <span>{item.label}</span>
-              </a>
-            ))}
-            <button
-              onClick={handleLogout}
-              className="flex items-center gap-3 px-4 py-3 rounded-lg transition-all duration-300 transform hover:scale-[1.02] mt-4 w-full text-left"
-              style={{
-                background: "var(--color-bg)",
-                border: "1px solid var(--color-accent)",
-                color: "var(--color-accent)",
-              }}
-            >
-              <FaSignOutAlt className="text-xl" />
-              <span>Logout</span>
-            </button>
-          </nav>
-        </div>
-      </div>
-
       {/* Top Navbar */}
       <div
         className="sticky top-0 z-30 px-4 sm:px-6 py-3 sm:py-4 flex justify-between items-center shadow-lg"
@@ -187,12 +61,27 @@ function Dashboard() {
           color: "var(--color-text)",
         }}
       >
-        <h1
-          className="text-lg sm:text-2xl font-bold ml-12 md:ml-0"
-          style={{ color: "var(--color-primary)" }}
-        >
-          NaviQuest
-        </h1>
+        <div className="flex items-center gap-4">
+          {/* Hamburger Menu Button for Mobile */}
+          <button
+            onClick={toggleSidebar}
+            className="md:hidden p-2 rounded transition-all duration-300 transform hover:scale-105"
+            style={{
+              background: "var(--color-primary)",
+              color: "var(--color-bg)",
+              boxShadow: "0 2px 4px rgba(var(--color-primary), 0.2)",
+            }}
+          >
+            <FaBars className="text-lg" />
+          </button>
+
+          <h1
+            className="text-lg sm:text-2xl font-bold"
+            style={{ color: "var(--color-primary)" }}
+          >
+            NaviQuest
+          </h1>
+        </div>
         <div className="flex items-center gap-4">
           {/* Theme Toggle Button */}
           <button
@@ -267,7 +156,7 @@ function Dashboard() {
       </div>
 
       {/* Main Container */}
-      <div className="p-4 sm:p-6 lg:p-8 md:ml-0">
+      <div className="p-4 sm:p-6 lg:p-8">
         {/* Welcome Section */}
         <div
           className="rounded-2xl p-4 sm:p-6 mb-6 sm:mb-8 flex flex-col lg:flex-row justify-between items-center shadow-lg transition-all duration-300 transform hover:scale-[1.01]"
@@ -280,18 +169,15 @@ function Dashboard() {
           <div className="text-center lg:text-left mb-4 lg:mb-0">
             <h2 className="text-xl sm:text-2xl font-bold mb-2">
               Welcome Back,{" "}
-              <span style={{ color: "var(--color-primary)" }}>Mentor</span>
+              <span style={{ color: "var(--color-primary)" }}>
+                {mentorName?.split(" ")[0]}
+              </span>
             </h2>
             <p style={{ color: "var(--color-text)" }}>
               Manage all sessions, track conversations and explore new
               recommendations from here.
             </p>
           </div>
-          <img
-            src="https://cdni.iconscout.com/illustration/premium/thumb/mentor-guiding-students-5679461-4753786.png"
-            alt="Mentor"
-            className="w-24 sm:w-32 transition-transform duration-300 transform hover:scale-110"
-          />
         </div>
 
         {/* Info Sessions */}
@@ -476,14 +362,6 @@ function Dashboard() {
           </div>
         </div>
       </div>
-
-      {/* Overlay for mobile when sidebar is open */}
-      {isSidebarOpen && (
-        <div
-          className="fixed inset-0 bg-black bg-opacity-50 z-30 md:hidden"
-          onClick={() => setIsSidebarOpen(false)}
-        ></div>
-      )}
     </div>
   );
 }
