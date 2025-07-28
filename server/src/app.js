@@ -38,9 +38,14 @@ app.use(cookieParser());
 import { userRouter } from "./routes/user.routes.js";
 import { authRouter } from "./routes/auth.routes.js";
 import { aiRouter } from "./routes/ai.routes.js";
+import { addMentorRouter } from './routes/addmentor.routes.js';
+import errorHandler from './middlewares/errorHandler.js';
+
 
 // routes declaration
 app.use("/api/v1/auth", authRouter);
 app.use("/api/v1/user", userRouter);
 app.use("/api/v1/ai", aiRouter);
+app.use('/api/v1/addmentor', addMentorRouter);
+app.use(errorHandler);
 export default app;
