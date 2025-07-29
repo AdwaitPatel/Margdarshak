@@ -1,7 +1,7 @@
 import React from "react";
-import { FaCalendarAlt, FaMapMarkerAlt } from "react-icons/fa";
+import { FaCalendarAlt, FaMapMarkerAlt, FaBars } from "react-icons/fa";
 
-function Calendar() {
+function Calendar({ mentorName, profile, toggleSidebar }) {
   const events = [
     {
       date: "15 July 2025",
@@ -18,40 +18,122 @@ function Calendar() {
   ];
 
   return (
-    <div className="text-white p-6 min-h-screen bg-[#0f172a]">
-      <h1 className="text-3xl font-bold text-[#64b5f6] mb-2 flex items-center gap-2">
-        <FaCalendarAlt />
-        Calendar
-      </h1>
-      <p className="text-gray-400 mb-6">
-        View and manage your upcoming meetings, sessions, and important dates.
-      </p>
+    <div
+      className="min-h-screen"
+      style={{
+        background: "var(--color-bg)",
+        color: "var(--color-text)",
+      }}
+    >
+      {/* Top Navbar */}
+      <div
+        className="sticky top-0 z-30 px-4 sm:px-6 py-3 sm:py-4 flex justify-between items-center shadow-lg"
+        style={{
+          background: "var(--color-bg)",
+          borderBottom: "1px solid var(--color-secondary)",
+          color: "var(--color-text)",
+        }}
+      >
+        <div className="flex items-center gap-4">
+          {/* Hamburger Menu Button for Mobile */}
+          <button
+            onClick={toggleSidebar}
+            className="md:hidden p-2 rounded transition-all duration-300 transform hover:scale-105"
+            style={{
+              background: "var(--color-primary)",
+              color: "var(--color-bg)",
+              boxShadow: "0 2px 4px rgba(var(--color-primary), 0.2)",
+            }}
+          >
+            <FaBars className="text-lg" />
+          </button>
 
-      <div className="bg-[#1e293b] p-6 rounded-xl shadow-md border border-gray-700">
-        <h2 className="text-xl font-semibold mb-4">Upcoming Events</h2>
+          <h1
+            className="text-lg sm:text-2xl font-bold flex items-center gap-2"
+            style={{ color: "var(--color-primary)" }}
+          >
+            <FaCalendarAlt />
+            Calendar
+          </h1>
+        </div>
+      </div>
 
-        <ul className="space-y-4">
-          {events.map((event, idx) => (
-            <li
-              key={idx}
-              className="flex justify-between items-center bg-[#0f172a] hover:bg-[#1a1a2e] transition rounded-lg p-4"
-            >
-              <div className="flex items-start gap-3">
-                <FaMapMarkerAlt className="text-blue-400 mt-1" />
-                <div>
-                  <p className="text-base font-semibold">{event.title}</p>
-                  <p className="text-sm text-gray-400">{event.date}</p>
+      {/* Main Content */}
+      <div className="p-6">
+        <p className="mb-6" style={{ color: "var(--color-secondary)" }}>
+          View and manage your upcoming meetings, sessions, and important dates.
+        </p>
+
+        <div
+          className="p-6 rounded-xl shadow-lg transition-all duration-300"
+          style={{
+            background: "var(--color-bg)",
+            border: "1px solid var(--color-secondary)",
+            boxShadow: "0 4px 6px rgba(var(--color-primary-rgb), 0.1)",
+          }}
+        >
+          <h2
+            className="text-xl font-semibold mb-4"
+            style={{ color: "var(--color-text)" }}
+          >
+            Upcoming Events
+          </h2>
+
+          <ul className="space-y-4">
+            {events.map((event, idx) => (
+              <li
+                key={idx}
+                className="flex justify-between items-center rounded-lg p-4 transition-all duration-300 cursor-pointer hover:scale-[1.02]"
+                style={{
+                  background: "var(--color-bg)",
+                  border: "1px solid var(--color-secondary)",
+                  boxShadow: "0 2px 4px rgba(var(--color-primary-rgb), 0.05)",
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.boxShadow =
+                    "0 4px 8px rgba(var(--color-primary-rgb), 0.15)";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.boxShadow =
+                    "0 2px 4px rgba(var(--color-primary-rgb), 0.05)";
+                }}
+              >
+                <div className="flex items-start gap-3">
+                  <FaMapMarkerAlt
+                    className="mt-1"
+                    style={{ color: "var(--color-primary)" }}
+                  />
+                  <div>
+                    <p
+                      className="text-base font-semibold"
+                      style={{ color: "var(--color-text)" }}
+                    >
+                      {event.title}
+                    </p>
+                    <p
+                      className="text-sm"
+                      style={{ color: "var(--color-secondary)" }}
+                    >
+                      {event.date}
+                    </p>
+                  </div>
                 </div>
-              </div>
-              <button className="bg-blue-600 px-4 py-1 rounded hover:bg-blue-700 text-sm">
-                View
-              </button>
-            </li>
-          ))}
-        </ul>
+                <button
+                  className="px-4 py-2 rounded text-sm transition-all duration-300 transform hover:scale-105"
+                  style={{
+                    background: "var(--color-primary)",
+                    color: "var(--color-bg)",
+                    boxShadow: "0 2px 4px rgba(var(--color-primary-rgb), 0.2)",
+                  }}
+                >
+                  View
+                </button>
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
     </div>
   );
 }
-
 export default Calendar;

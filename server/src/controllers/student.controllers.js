@@ -1,14 +1,6 @@
-import { User } from "../models/user.models.js";
-import { Meeting } from "../models/meeting.models.js";
-
-// arbab ka task dashbord hai
-
-// mahak ka task => make api for meeting form here
-
 import { MeetingForm } from "../models/meetingForm.models.js";
 import { log } from "../utils/logger.js";
 
-// Meeting form data save karne ka function
 const saveMeetingForm = async (req, res) => {
     try {
         const {
@@ -45,6 +37,7 @@ const saveMeetingForm = async (req, res) => {
             });
         }
 
+		// user can't schedule two meetings in a day with same mentor
         const existingMeeting = await MeetingForm.findOne({
             email,
             mentorId,
@@ -79,8 +72,6 @@ const saveMeetingForm = async (req, res) => {
         });
     } catch (error) {
         log.error(`Error saving meeting: ${error}`);
-
-        // Error response
         res.status(500).json({
             success: false,
             message: "Failed to book meeting",
@@ -89,9 +80,10 @@ const saveMeetingForm = async (req, res) => {
     }
 };
 
-// Saari meetings get karne ka function *
+// test these two
 const getAllMeetings = async (req, res) => {
     try {
+		// todo => get student id from headers token
         const meetingForms = await MeetingForm.find().sort({ createdAt: -1 });
 
         res.status(200).json({
@@ -110,7 +102,6 @@ const getAllMeetings = async (req, res) => {
     }
 };
 
-// Specific meeting get karne ka function *
 const getMeetingById = async (req, res) => {
     try {
         const { id } = req.params;

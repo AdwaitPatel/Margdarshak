@@ -12,7 +12,7 @@ const connectDB = async () => {
             `MongoDB connected!! DB HOST : ${connectionInstance.connection.host} Cluster : ${connectionInstance.connection.name}`
         );
     } catch (error) {
-        log.error("MongoDB connection error", error);
+        console.log("MongoDB connection error", error);
         process.exit(1);
     }
 };
