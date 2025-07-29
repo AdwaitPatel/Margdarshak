@@ -14,6 +14,7 @@ import MentorsPage from "./pages/Mentors";
 import Terms from "./pages/Terms";
 import StudentDashboard from "./pages/StudentDashboard";
 import MentorDashboard from "./pages/MentorDashboard.jsx";
+import AdminDashboard from "./pages/AdminDashboard.jsx";
 import ScheduleMeeting from "./pages/ScheduleMeeting";
 import About from "./pages/About";
 import ProtectedRoute from "./components/ProtectedRoute";
@@ -54,6 +55,14 @@ const App = () => {
             element={
               <ProtectedRoute allowedRoles={["mentor", "admin"]}>
                 <MentorDashboard />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/admin/dashboard/*"
+            element={
+              <ProtectedRoute allowedRoles={["admin"]}>
+                <AdminDashboard />
               </ProtectedRoute>
             }
           />
