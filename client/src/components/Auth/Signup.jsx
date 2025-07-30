@@ -50,16 +50,28 @@ const Title = () => (
   </h2>
 );
 
-const GoogleButton = () => (
-  <button className="flex items-center justify-center gap-2 w-full py-3 bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg text-white text-base hover:bg-white/20 transition-all duration-300 shadow-lg">
-    <img
-      src="https://www.svgrepo.com/show/475656/google-color.svg"
-      alt="Google icon"
-      className="w-5 h-5"
-    />
-    Signup with Google
-  </button>
-);
+const GoogleButton = () => {
+  const handleGoogleSignup = () => {
+    // Redirect to Google OAuth endpoint
+    window.location.href = `${
+      import.meta.env.VITE_API_URL || "http://localhost:8000"
+    }/api/v1/auth/google`;
+  };
+
+  return (
+    <button
+      onClick={handleGoogleSignup}
+      className="flex items-center justify-center gap-2 w-full py-3 bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg text-white text-base hover:bg-white/20 transition-all duration-300 shadow-lg"
+    >
+      <img
+        src="https://www.svgrepo.com/show/475656/google-color.svg"
+        alt="Google icon"
+        className="w-5 h-5"
+      />
+      Signup with Google
+    </button>
+  );
+};
 
 const Divider = () => (
   <div className="relative text-center my-8 text-white/70">

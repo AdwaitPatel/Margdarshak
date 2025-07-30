@@ -2,6 +2,8 @@ import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
+import session from "express-session";
+import passport from "./config/passport.js";
 
 dotenv.config();
 
@@ -14,6 +16,23 @@ app.use(
         credentials: true,
     })
 );
+
+// Session configuration for passport
+app.use(
+    session({
+        secret: process.env.SESSION_SECRET || "session-secret-key",
+        resave: false,
+        saveUninitialized: false,
+        cookie: {
+            secure: process.env.NODE_ENV === "production",
+            maxAge: 24 * 60 * 60 * 1000, // 24 hours
+        },
+    })
+);
+
+// Initialize passport
+app.use(passport.initialize());
+app.use(passport.session());
 
 // Middleware to parse JSON
 app.use(
@@ -43,4 +62,5 @@ import { aiRouter } from "./routes/ai.routes.js";
 app.use("/api/v1/auth", authRouter);
 app.use("/api/v1/user", userRouter);
 app.use("/api/v1/ai", aiRouter);
+
 export default app;

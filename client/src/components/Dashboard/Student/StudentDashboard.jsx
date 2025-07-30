@@ -1,150 +1,153 @@
 import React, { useState, useEffect } from "react";
-import { Calendar, Menu, Moon, Sun, User } from "lucide-react";
+import {
+  Calendar,
+  Menu,
+  Moon,
+  Sun,
+  User,
+  LogOut,
+  Settings,
+  UserCircle,
+} from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
-// Session Card Component
-const SessionCard = ({ title, counselor, date, time, description }) => {
-  return (
-    <div
-      className="border border-gray-200/10 rounded-lg p-6"
-      style={{ background: "var(--color-bg)", color: "var(--color-text)" }}
-    >
-      <div className="flex justify-between items-start mb-3">
-        <div>
-          <h3
-            className="text-lg font-medium mb-1"
-            style={{ color: "var(--color-primary)" }}
-          >
-            {title}
-          </h3>
-          <p className="text-sm" style={{ color: "var(--color-text)" }}>
-            {counselor}
-          </p>
-        </div>
-        <div className="text-right">
-          <p className="text-sm" style={{ color: "var(--color-text)" }}>
-            {date}
-          </p>
-          <p className="text-xs" style={{ color: "var(--color-secondary)" }}>
-            {time}
-          </p>
-        </div>
-      </div>
-      <p className="text-sm mb-3" style={{ color: "var(--color-text)" }}>
-        {description}
-      </p>
-      <div className="flex justify-between items-center">
-        <span
-          className="text-xs px-2 py-1 rounded"
-          style={{
-            background: "var(--color-accent)",
-            color: "var(--color-bg)",
-          }}
-        >
-          Completed
-        </span>
-        <button
-          className="text-sm px-3 py-1 rounded transition-colors"
-          style={{
-            border: "1px solid var(--color-primary)",
-            color: "var(--color-primary)",
-            ":hover": {
-              background: "var(--color-primary)",
-              color: "var(--color-bg)",
-            },
-          }}
-        >
-          View Details
-        </button>
-      </div>
-    </div>
-  );
-};
-
 // Dashboard Content Component
-const DashboardContent = () => {
+const DashboardContent = ({ user }) => {
   return (
-    <div className="h-full p-4 sm:p-6">
+    <div className="h-full p-4 lg:p-6 space-y-6 lg:space-y-8">
+      {/* Welcome Section */}
+      <div className="mb-6 lg:mb-8">
+        <h1
+          className="text-2xl lg:text-3xl font-bold mb-2"
+          style={{ color: "var(--color-primary)" }}
+        >
+          Welcome back, {user?.fullName || "Student"}!
+        </h1>
+        <p
+          className="text-sm lg:text-base"
+          style={{ color: "var(--color-secondary)" }}
+        >
+          Track your progress and upcoming sessions
+        </p>
+      </div>
+
       {/* Your Appointments Section */}
-      <div className="mb-8">
+      <div className="mb-6 lg:mb-8">
         <h2
-          className="text-lg sm:text-xl mb-4"
+          className="text-xl lg:text-2xl font-semibold mb-4 lg:mb-6"
           style={{ color: "var(--color-primary)" }}
         >
           Your appointments
         </h2>
         <div
-          className="rounded-lg p-4 sm:p-6 shadow-lg transition-all duration-300"
+          className="rounded-xl p-4 lg:p-6 shadow-lg transition-all duration-300 hover:shadow-xl"
           style={{
             background: "var(--color-bg)",
             border: "1px solid var(--color-secondary)",
-            boxShadow: "0 4px 6px rgba(var(--color-primary), 0.1)",
+            boxShadow: "0 8px 32px rgba(var(--color-primary-rgb), 0.1)",
           }}
         >
-          <div className="flex items-center mb-2">
-            <Calendar
-              className="w-4 h-4 mr-2"
-              style={{ color: "var(--color-primary)" }}
-            />
-            <span className="text-sm" style={{ color: "var(--color-text)" }}>
-              Meeting at 23rd of July
-            </span>
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <div className="flex-1">
+              <div className="flex items-center mb-3">
+                <Calendar
+                  className="w-5 h-5 mr-3 flex-shrink-0"
+                  style={{ color: "var(--color-primary)" }}
+                />
+                <span
+                  className="text-base lg:text-lg font-medium"
+                  style={{ color: "var(--color-text)" }}
+                >
+                  Career Guidance Session
+                </span>
+              </div>
+              <p
+                className="text-sm lg:text-base mb-2"
+                style={{ color: "var(--color-text)" }}
+              >
+                📅 July 23rd, 2024 • ⏰ 2:00 PM - 3:00 PM
+              </p>
+              <p
+                className="text-sm"
+                style={{ color: "var(--color-secondary)" }}
+              >
+                Meeting with Dr. Sarah Johnson to discuss your career path in
+                technology
+              </p>
+            </div>
+            <div className="flex flex-col sm:flex-row gap-2">
+              <button
+                className="px-4 lg:px-6 py-2 lg:py-3 rounded-lg text-sm lg:text-base font-medium transition-all duration-300 transform hover:scale-105"
+                style={{
+                  background: "var(--color-primary)",
+                  color: "var(--color-bg)",
+                  boxShadow: "0 4px 12px rgba(var(--color-primary-rgb), 0.3)",
+                }}
+              >
+                Join Meeting
+              </button>
+              <button
+                className="px-4 lg:px-6 py-2 lg:py-3 rounded-lg text-sm lg:text-base font-medium transition-all duration-300 transform hover:scale-105"
+                style={{
+                  background: "transparent",
+                  color: "var(--color-primary)",
+                  border: "1px solid var(--color-primary)",
+                }}
+              >
+                Reschedule
+              </button>
+            </div>
           </div>
-          <p
-            className="text-sm mb-4"
-            style={{ color: "var(--color-secondary)" }}
-          >
-            Some details about meeting
-          </p>
-          <button
-            className="w-full sm:w-auto px-4 py-2 rounded text-sm transition-all duration-300 transform hover:scale-105"
-            style={{
-              background: "var(--color-primary)",
-              color: "var(--color-bg)",
-              boxShadow: "0 2px 4px rgba(var(--color-primary), 0.2)",
-            }}
-          >
-            Upcoming
-          </button>
         </div>
       </div>
 
       {/* Previous Sessions Section */}
       <div>
         <h2
-          className="text-lg sm:text-xl mb-4 sm:mb-6"
+          className="text-xl lg:text-2xl font-semibold mb-4 lg:mb-6"
           style={{ color: "var(--color-primary)" }}
         >
-          My Previous Counselling Sessions
+          Recent Counselling Sessions
         </h2>
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
+        <div className="grid grid-cols-1 xl:grid-cols-2 gap-4 lg:gap-6">
           {/* Career Guidance Session */}
           <div
-            className="rounded-lg p-4 sm:p-6 transition-all duration-300 transform hover:scale-[1.02]"
+            className="rounded-xl p-4 lg:p-6 transition-all duration-300 transform hover:scale-[1.02] hover:shadow-xl cursor-pointer"
             style={{
               background: "var(--color-bg)",
               border: "1px solid var(--color-secondary)",
-              boxShadow: "0 4px 6px rgba(var(--color-primary), 0.1)",
+              boxShadow: "0 8px 32px rgba(var(--color-primary-rgb), 0.1)",
             }}
           >
-            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-4">
-              <div className="mb-2 sm:mb-0">
+            <div className="flex items-start justify-between mb-4">
+              <div className="flex-1">
                 <h3
-                  className="text-base sm:text-lg font-medium mb-1"
+                  className="text-lg lg:text-xl font-semibold mb-2"
                   style={{ color: "var(--color-primary)" }}
                 >
                   Career Guidance Session
                 </h3>
-                <p className="text-sm" style={{ color: "var(--color-text)" }}>
-                  Dr. Sarah Johnson
-                </p>
+                <div className="flex items-center mb-2">
+                  <div className="w-8 h-8 rounded-full bg-gradient-to-r from-blue-500 to-purple-500 flex items-center justify-center mr-3">
+                    <span className="text-white text-sm font-medium">SJ</span>
+                  </div>
+                  <p
+                    className="text-sm lg:text-base"
+                    style={{ color: "var(--color-text)" }}
+                  >
+                    Dr. Sarah Johnson
+                  </p>
+                </div>
               </div>
-              <div className="text-left sm:text-right">
-                <p className="text-sm" style={{ color: "var(--color-text)" }}>
-                  15th July, 2024
+              <div className="text-right">
+                <p
+                  className="text-sm lg:text-base font-medium"
+                  style={{ color: "var(--color-text)" }}
+                >
+                  July 15, 2024
                 </p>
                 <p
-                  className="text-xs"
+                  className="text-xs lg:text-sm"
                   style={{ color: "var(--color-secondary)" }}
                 >
                   2:00 PM - 3:00 PM
@@ -152,95 +155,26 @@ const DashboardContent = () => {
               </div>
             </div>
             <p
-              className="text-sm mb-4"
+              className="text-sm lg:text-base mb-4 line-clamp-2"
               style={{ color: "var(--color-secondary)" }}
             >
               Discussed career options in technology sector, identified
-              strengths and interests.
+              strengths and interests, and created a roadmap for skill
+              development.
             </p>
             <div className="flex flex-col sm:flex-row justify-between items-center gap-3">
-              <span
-                className="text-xs px-3 py-1 rounded-full w-full sm:w-auto text-center"
-                style={{
-                  background: "var(--color-accent)",
-                  color: "var(--color-bg)",
-                }}
-              >
-                Completed
-              </span>
-              <button
-                className="text-sm px-4 py-2 rounded transition-all duration-300 transform hover:scale-105 w-full sm:w-auto"
-                style={{
-                  background: "var(--color-primary)",
-                  color: "var(--color-bg)",
-                  boxShadow: "0 2px 4px rgba(var(--color-primary), 0.2)",
-                }}
-              >
-                View Details
-              </button>
-            </div>
-          </div>
-
-          {/* Skills Assessment */}
-          <div
-            className="rounded-lg p-4 sm:p-6 transition-all duration-300 transform hover:scale-[1.02]"
-            style={{
-              background: "var(--color-bg)",
-              border: "1px solid var(--color-secondary)",
-              boxShadow: "0 4px 6px rgba(var(--color-primary), 0.1)",
-            }}
-          >
-            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-4">
-              <div className="mb-2 sm:mb-0">
-                <h3
-                  className="text-base sm:text-lg font-medium mb-1"
-                  style={{ color: "var(--color-primary)" }}
+              <div className="flex gap-2">
+                <button
+                  className="text-xs lg:text-sm px-3 lg:px-4 py-2 rounded-lg transition-all duration-300 transform hover:scale-105"
+                  style={{
+                    background: "transparent",
+                    color: "var(--color-primary)",
+                    border: "1px solid var(--color-primary)",
+                  }}
                 >
-                  Skills Assessment
-                </h3>
-                <p className="text-sm" style={{ color: "var(--color-text)" }}>
-                  Dr. Michael Chen
-                </p>
+                  Give Feedback
+                </button>
               </div>
-              <div className="text-left sm:text-right">
-                <p className="text-sm" style={{ color: "var(--color-text)" }}>
-                  8th July, 2024
-                </p>
-                <p
-                  className="text-xs"
-                  style={{ color: "var(--color-secondary)" }}
-                >
-                  10:00 AM - 11:30 AM
-                </p>
-              </div>
-            </div>
-            <p
-              className="text-sm mb-4"
-              style={{ color: "var(--color-secondary)" }}
-            >
-              Comprehensive skills evaluation and personality assessment for
-              career planning.
-            </p>
-            <div className="flex flex-col sm:flex-row justify-between items-center gap-3">
-              <span
-                className="text-xs px-3 py-1 rounded-full w-full sm:w-auto text-center"
-                style={{
-                  background: "var(--color-accent)",
-                  color: "var(--color-bg)",
-                }}
-              >
-                Completed
-              </span>
-              <button
-                className="text-sm px-4 py-2 rounded transition-all duration-300 transform hover:scale-105 w-full sm:w-auto"
-                style={{
-                  background: "var(--color-primary)",
-                  color: "var(--color-bg)",
-                  boxShadow: "0 2px 4px rgba(var(--color-primary), 0.2)",
-                }}
-              >
-                View Details
-              </button>
             </div>
           </div>
         </div>
@@ -314,118 +248,11 @@ const MeetingsContent = () => {
   );
 };
 
-// Explore Content Component
-const ExploreContent = () => {
-  return (
-    <div className="h-full flex flex-col">
-      <div className="flex-1 flex items-center justify-center">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl w-full">
-          {[
-            {
-              title: "Career Paths",
-              description:
-                "Explore different career opportunities and find the path that suits you best",
-              icon: "🎯",
-            },
-            {
-              title: "Skill Development",
-              description:
-                "Learn new skills and enhance your capabilities for future success",
-              icon: "📚",
-            },
-            {
-              title: "Industry Insights",
-              description:
-                "Get valuable insights about different industries and market trends",
-              icon: "💡",
-            },
-          ].map((item, idx) => (
-            <div
-              key={idx}
-              className="rounded-lg p-8 transition-all duration-300 cursor-pointer transform hover:scale-105"
-              style={{
-                background: "var(--color-bg)",
-                border: "1px solid var(--color-secondary)",
-                boxShadow: "0 4px 6px rgba(var(--color-primary), 0.1)",
-              }}
-            >
-              <div className="text-4xl mb-4">{item.icon}</div>
-              <h3
-                className="text-xl font-medium mb-4"
-                style={{ color: "var(--color-primary)" }}
-              >
-                {item.title}
-              </h3>
-              <p style={{ color: "var(--color-secondary)" }}>
-                {item.description}
-              </p>
-            </div>
-          ))}
-        </div>
-      </div>
-    </div>
-  );
-};
-
-// Career Quiz Content Component
-const CareerQuizContent = () => {
-  return (
-    <div className="h-full flex flex-col">
-      <div
-        className="rounded-lg p-6 flex-1 flex flex-col justify-center max-w-4xl mx-auto w-full transition-all duration-300"
-        style={{
-          background: "var(--color-bg)",
-          border: "1px solid var(--color-secondary)",
-          boxShadow: "0 4px 6px rgba(var(--color-primary), 0.1)",
-        }}
-      >
-        <div className="text-center">
-          <h3
-            className="text-3xl font-bold mb-6"
-            style={{ color: "var(--color-primary)" }}
-          >
-            Career Assessment Quiz
-          </h3>
-          <p
-            className="mb-8 text-lg max-w-2xl mx-auto"
-            style={{ color: "var(--color-secondary)" }}
-          >
-            Take our comprehensive career assessment to discover your ideal
-            career path based on your interests, skills, and personality.
-          </p>
-          <button
-            className="px-8 py-4 rounded-lg text-lg font-semibold transition-all duration-300 transform hover:scale-105"
-            style={{
-              background: "var(--color-primary)",
-              color: "var(--color-bg)",
-              boxShadow: "0 4px 6px rgba(var(--color-primary), 0.2)",
-            }}
-          >
-            Start Quiz
-          </button>
-        </div>
-      </div>
-    </div>
-  );
-};
-
-const profileMenuItems = ["My Profile", "Settings", "Logout"];
-
 const StudentDashboard = ({ sidebarOpen, setSidebarOpen, selectedTab }) => {
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [profileDropdownOpen, setProfileDropdownOpen] = useState(false);
+  const [user, setUser] = useState(null);
   const navigate = useNavigate();
-
-  const handleProfileMenuClick = (item) => {
-    setProfileDropdownOpen(false);
-
-    if (item === "Logout") {
-      // Clear any stored authentication data
-      localStorage.removeItem("authToken");
-      localStorage.removeItem("user");
-      navigate("/");
-    }
-  };
 
   useEffect(() => {
     // Check if user has a theme preference in localStorage
@@ -434,7 +261,50 @@ const StudentDashboard = ({ sidebarOpen, setSidebarOpen, selectedTab }) => {
       setIsDarkMode(true);
       document.documentElement.classList.add("dark");
     }
-  }, []);
+
+    // Get user data from localStorage
+    const userData = localStorage.getItem("user");
+    if (userData) {
+      try {
+        setUser(JSON.parse(userData));
+      } catch (error) {
+        console.error("Error parsing user data:", error);
+      }
+    }
+
+    // Click outside handler for dropdown
+    const handleClickOutside = (event) => {
+      if (
+        profileDropdownOpen &&
+        !event.target.closest(".profile-dropdown-container")
+      ) {
+        setProfileDropdownOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [profileDropdownOpen]);
+
+  const handleProfileMenuClick = (item) => {
+    setProfileDropdownOpen(false);
+
+    if (item === "logout") {
+      // Clear any stored authentication data
+      localStorage.removeItem("authToken");
+      localStorage.removeItem("refreshToken");
+      localStorage.removeItem("user");
+      navigate("/");
+    } else if (item === "profile") {
+      // Navigate to profile page or show profile modal
+      console.log("Navigate to profile");
+    } else if (item === "settings") {
+      // Navigate to settings page
+      console.log("Navigate to settings");
+    }
+  };
 
   const toggleTheme = () => {
     setIsDarkMode(!isDarkMode);
@@ -450,15 +320,11 @@ const StudentDashboard = ({ sidebarOpen, setSidebarOpen, selectedTab }) => {
   const renderContent = () => {
     switch (selectedTab) {
       case "Dashboard":
-        return <DashboardContent />;
+        return <DashboardContent user={user} />;
       case "Meetings":
         return <MeetingsContent />;
-      case "Explore":
-        return <ExploreContent />;
-      case "Career Quiz":
-        return <CareerQuizContent />;
       default:
-        return <DashboardContent />;
+        return <DashboardContent user={user} />;
     }
   };
 
@@ -467,91 +333,197 @@ const StudentDashboard = ({ sidebarOpen, setSidebarOpen, selectedTab }) => {
       className="flex-1 flex flex-col h-full"
       style={{ background: "var(--color-bg)", color: "var(--color-text)" }}
     >
-      {/* Unified Navigation Bar */}
+      {/* Enhanced Navigation Bar */}
       <div
-        className="sticky top-0 z-30 px-4 sm:px-6 py-3 sm:py-4 flex justify-between items-center shadow-lg"
+        className="sticky top-0 z-30 px-4 lg:px-6 py-3 lg:py-4 flex justify-between items-center backdrop-blur-md"
         style={{
-          background: "var(--color-bg)",
+          background: "rgba(var(--color-bg-rgb), 0.95)",
           borderBottom: "1px solid var(--color-secondary)",
-          boxShadow: "0 2px 4px rgba(var(--color-primary), 0.1)",
+          boxShadow: "0 4px 20px rgba(var(--color-primary-rgb), 0.1)",
         }}
       >
-        {/* Left Section - Hamburger Menu */}
-        <button
-          onClick={() => setSidebarOpen(!sidebarOpen)}
-          className="p-2 rounded-lg transition-all duration-300 transform hover:scale-105"
-          style={{
-            background: "var(--color-primary)",
-            color: "var(--color-bg)",
-            boxShadow: "0 2px 4px rgba(var(--color-primary), 0.2)",
-          }}
-        >
-          <Menu className="w-5 h-5" />
-        </button>
-
-        {/* Center Section - NaviQuest Logo */}
-        <h1
-          className="text-lg sm:text-2xl font-bold"
-          style={{ color: "var(--color-primary)" }}
-        >
-          NaviQuest
-        </h1>
-
-        {/* Right Section - Theme Toggle and Profile Dropdown */}
-        <div className="flex items-center gap-2 sm:gap-4 relative">
+        {/* Left Section - Hamburger Menu & Welcome */}
+        <div className="flex items-center gap-3 lg:gap-4">
           <button
-            onClick={toggleTheme}
-            className="p-2 rounded-full transition-all duration-300 transform hover:scale-105"
+            onClick={() => setSidebarOpen(!sidebarOpen)}
+            className="p-2 lg:p-3 rounded-xl transition-all duration-300 transform hover:scale-105 lg:hidden"
             style={{
               background: "var(--color-primary)",
               color: "var(--color-bg)",
-              boxShadow: "0 2px 4px rgba(var(--color-primary), 0.2)",
+              boxShadow: "0 4px 12px rgba(var(--color-primary-rgb), 0.3)",
+            }}
+          >
+            <Menu className="w-5 h-5 lg:w-6 lg:h-6" />
+          </button>
+
+          <div className="lg:hidden">
+            <h1
+              className="text-lg font-bold"
+              style={{ color: "var(--color-primary)" }}
+            >
+              NaviQuest
+            </h1>
+          </div>
+        </div>
+
+        {/* Right Section - Theme Toggle and Enhanced Profile Dropdown */}
+        <div className="flex items-center gap-2 lg:gap-4 relative profile-dropdown-container">
+          <button
+            onClick={toggleTheme}
+            className="p-2 lg:p-3 rounded-xl transition-all duration-300 transform hover:scale-105"
+            style={{
+              background: "var(--color-primary)",
+              color: "var(--color-bg)",
+              boxShadow: "0 4px 12px rgba(var(--color-primary-rgb), 0.3)",
             }}
           >
             {isDarkMode ? (
-              <Sun className="w-5 h-5" />
+              <Sun className="w-4 h-4 lg:w-5 lg:h-5" />
             ) : (
-              <Moon className="w-5 h-5" />
+              <Moon className="w-4 h-4 lg:w-5 lg:h-5" />
             )}
           </button>
+
+          {/* Enhanced Profile Button */}
           <button
             onClick={() => setProfileDropdownOpen(!profileDropdownOpen)}
-            className="w-8 h-8 rounded-full flex items-center justify-center transition-all duration-300 transform hover:scale-105"
+            className="flex items-center gap-2 lg:gap-3 p-2 lg:p-3 rounded-xl transition-all duration-300 transform hover:scale-105"
             style={{
-              background: "var(--color-primary)",
-              border: "2px solid var(--color-accent)",
+              background: "var(--color-bg)",
+              border: "2px solid var(--color-primary)",
+              boxShadow: "0 4px 12px rgba(var(--color-primary-rgb), 0.2)",
             }}
           >
-            <User className="w-5 h-5" style={{ color: "var(--color-bg)" }} />
+            {user?.profilePicture ? (
+              <img
+                src={user.profilePicture}
+                alt={user.fullName || "Profile"}
+                className="w-8 h-8 lg:w-10 lg:h-10 rounded-full object-cover"
+              />
+            ) : (
+              <div
+                className="w-8 h-8 lg:w-10 lg:h-10 rounded-full flex items-center justify-center text-sm lg:text-base font-semibold"
+                style={{
+                  background: "var(--color-primary)",
+                  color: "var(--color-bg)",
+                }}
+              >
+                {user?.fullName?.charAt(0)?.toUpperCase() || "U"}
+              </div>
+            )}
+            <div className="hidden lg:block text-left">
+              <p
+                className="text-sm font-medium leading-tight"
+                style={{ color: "var(--color-text)" }}
+              >
+                {user?.fullName || "Student"}
+              </p>
+              <p
+                className="text-xs leading-tight"
+                style={{ color: "var(--color-secondary)" }}
+              >
+                {user?.email || "student@example.com"}
+              </p>
+            </div>
           </button>
+
+          {/* Enhanced Profile Dropdown */}
           {profileDropdownOpen && (
             <div
-              className="absolute right-0 mt-40 w-64 rounded-lg shadow-lg z-50 transition-all duration-300"
+              className="absolute right-0 top-full mt-2 w-64 lg:w-80 rounded-xl shadow-2xl z-50 transition-all duration-300 transform origin-top-right"
               style={{
                 background: "var(--color-bg)",
                 border: "1px solid var(--color-secondary)",
-                boxShadow: "0 4px 6px rgba(var(--color-primary), 0.1)",
+                boxShadow: "0 20px 60px rgba(var(--color-primary-rgb), 0.15)",
               }}
             >
+              {/* User Info Header */}
+              <div
+                className="p-4 lg:p-6 border-b"
+                style={{ borderColor: "var(--color-secondary)" }}
+              >
+                <div className="flex items-center gap-3 lg:gap-4">
+                  {user?.profilePicture ? (
+                    <img
+                      src={user.profilePicture}
+                      alt={user.fullName || "Profile"}
+                      className="w-12 h-12 lg:w-16 lg:h-16 rounded-full object-cover border-2"
+                      style={{ borderColor: "var(--color-primary)" }}
+                    />
+                  ) : (
+                    <div
+                      className="w-12 h-12 lg:w-16 lg:h-16 rounded-full flex items-center justify-center text-xl lg:text-2xl font-bold border-2"
+                      style={{
+                        background: "var(--color-primary)",
+                        color: "var(--color-bg)",
+                        borderColor: "var(--color-primary)",
+                      }}
+                    >
+                      {user?.fullName?.charAt(0)?.toUpperCase() || "U"}
+                    </div>
+                  )}
+                  <div className="flex-1 min-w-0">
+                    <h3
+                      className="font-semibold text-base lg:text-lg truncate"
+                      style={{ color: "var(--color-text)" }}
+                    >
+                      {user?.fullName || "Student Name"}
+                    </h3>
+                    <p
+                      className="text-sm truncate"
+                      style={{ color: "var(--color-secondary)" }}
+                    >
+                      {user?.email || "student@example.com"}
+                    </p>
+                    <span
+                      className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium mt-1"
+                      style={{
+                        background: "var(--color-accent)",
+                        color: "var(--color-bg)",
+                      }}
+                    >
+                      {user?.role || "Student"}
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Menu Items */}
               <div className="py-2">
-                {profileMenuItems.map((item, index) => (
-                  <button
-                    key={index}
-                    onClick={() => handleProfileMenuClick(item)}
-                    className={`w-full text-left px-4 py-2 text-sm transition-all duration-300 hover:opacity-80 ${
-                      item === "Logout" ? "rounded-b" : ""
-                    }`}
-                    style={{
-                      color:
-                        item === "Logout"
-                          ? "var(--color-accent)"
-                          : "var(--color-text)",
-                      background: "var(--color-bg)",
-                    }}
-                  >
-                    {item}
-                  </button>
-                ))}
+                <button
+                  onClick={() => handleProfileMenuClick("profile")}
+                  className="w-full flex items-center gap-3 px-4 lg:px-6 py-3 text-left transition-all duration-300 hover:opacity-80"
+                  style={{ color: "var(--color-text)" }}
+                >
+                  <UserCircle
+                    className="w-5 h-5"
+                    style={{ color: "var(--color-primary)" }}
+                  />
+                  <span className="text-sm lg:text-base">My Profile</span>
+                </button>
+                <button
+                  onClick={() => handleProfileMenuClick("settings")}
+                  className="w-full flex items-center gap-3 px-4 lg:px-6 py-3 text-left transition-all duration-300 hover:opacity-80"
+                  style={{ color: "var(--color-text)" }}
+                >
+                  <Settings
+                    className="w-5 h-5"
+                    style={{ color: "var(--color-primary)" }}
+                  />
+                  <span className="text-sm lg:text-base">Settings</span>
+                </button>
+                <hr
+                  style={{ borderColor: "var(--color-secondary)" }}
+                  className="my-2"
+                />
+                <button
+                  onClick={() => handleProfileMenuClick("logout")}
+                  className="w-full flex items-center gap-3 px-4 lg:px-6 py-3 text-left transition-all duration-300 hover:opacity-80"
+                  style={{ color: "var(--color-accent)" }}
+                >
+                  <LogOut className="w-5 h-5" />
+                  <span className="text-sm lg:text-base">Logout</span>
+                </button>
               </div>
             </div>
           )}
