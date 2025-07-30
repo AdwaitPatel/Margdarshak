@@ -189,19 +189,6 @@ function Sidebar() {
             );
           })}
         </nav>
-
-        {/* Footer */}
-        <div
-          className="p-4 border-t"
-          style={{ borderColor: "var(--color-secondary)" }}
-        >
-          <p
-            className="text-xs text-center"
-            style={{ color: "var(--color-secondary)" }}
-          >
-            Margdarshak Admin Panel
-          </p>
-        </div>
       </div>
 
       {/* Overlay for mobile */}

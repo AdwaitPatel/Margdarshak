@@ -5,8 +5,6 @@ import {
   FaUser,
   FaEnvelope,
   FaPhone,
-  FaGraduationCap,
-  FaFileAlt,
   FaCamera,
   FaSave,
   FaSpinner,
@@ -88,9 +86,6 @@ function PersonalInfo({ toggleSidebar }) {
     fullName: "",
     email: "",
     phone: "",
-    specialization: "",
-    experience: "",
-    bio: "",
     profilePicture: "",
   });
 
@@ -102,11 +97,11 @@ function PersonalInfo({ toggleSidebar }) {
     setToast((prev) => ({ ...prev, isVisible: false }));
   };
 
-  // Fetch mentor profile data
+  // Fetch student profile data
   const fetchProfile = React.useCallback(async () => {
     try {
       const token = localStorage.getItem("authToken");
-      const response = await api.get("/user/mentor/profile", {
+      const response = await api.get("/user/student/profile", {
         headers: {
           Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
@@ -114,16 +109,13 @@ function PersonalInfo({ toggleSidebar }) {
       });
 
       if (response.data.success) {
-        const mentorData = response.data.data;
-        setProfile(mentorData);
+        const studentData = response.data.data;
+        setProfile(studentData);
         setFormData({
-          fullName: mentorData.fullName || "",
-          email: mentorData.email || "",
-          phone: mentorData.phone || "",
-          specialization: mentorData.specialization || "",
-          experience: mentorData.experience || "",
-          bio: mentorData.bio || "",
-          profilePicture: mentorData.profilePicture || "",
+          fullName: studentData.fullName || "",
+          email: studentData.email || "",
+          phone: studentData.phone || "",
+          profilePicture: studentData.profilePicture || "",
         });
       } else {
         showToast("Failed to fetch profile data", "error");
@@ -157,13 +149,6 @@ function PersonalInfo({ toggleSidebar }) {
       errors.phone = "Phone number format is invalid";
     }
 
-    if (
-      formData.experience &&
-      (isNaN(formData.experience) || formData.experience < 0)
-    ) {
-      errors.experience = "Experience must be a valid number";
-    }
-
     setFormErrors(errors);
     return Object.keys(errors).length === 0;
   };
@@ -194,7 +179,7 @@ function PersonalInfo({ toggleSidebar }) {
 
     try {
       const token = localStorage.getItem("authToken");
-      const response = await api.put("/user/mentor/profile", formData, {
+      const response = await api.put("/user/student/profile", formData, {
         headers: {
           Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
@@ -241,6 +226,7 @@ function PersonalInfo({ toggleSidebar }) {
       </div>
     );
   }
+
   return (
     <div
       className="min-h-screen"
@@ -347,21 +333,19 @@ function PersonalInfo({ toggleSidebar }) {
                 className="text-2xl font-bold mb-2"
                 style={{ color: "var(--color-text)" }}
               >
-                {formData.fullName || "Mentor Name"}
+                {formData.fullName || "Student Name"}
               </h2>
               <p
                 className="text-lg mb-1"
                 style={{ color: "var(--color-secondary)" }}
               >
-                {formData.specialization || "Specialization"}
+                Student
               </p>
               <p
                 className="text-sm"
                 style={{ color: "var(--color-secondary)" }}
               >
-                {formData.experience
-                  ? `${formData.experience} years of experience`
-                  : "Experience not specified"}
+                {formData.email || "Email not specified"}
               </p>
             </div>
           </div>
@@ -474,7 +458,7 @@ function PersonalInfo({ toggleSidebar }) {
             </div>
 
             {/* Phone Number Field */}
-            <div>
+            <div className="md:col-span-2">
               <label
                 className="flex items-center gap-2 text-sm mb-2 font-medium"
                 style={{ color: "var(--color-secondary)" }}
@@ -520,135 +504,6 @@ function PersonalInfo({ toggleSidebar }) {
                 </p>
               )}
             </div>
-
-            {/* Specialization Field */}
-            <div>
-              <label
-                className="flex items-center gap-2 text-sm mb-2 font-medium"
-                style={{ color: "var(--color-secondary)" }}
-              >
-                <FaGraduationCap />
-                Specialization
-              </label>
-              <input
-                type="text"
-                name="specialization"
-                value={formData.specialization}
-                onChange={handleInputChange}
-                placeholder="e.g., Career Counseling, Psychology"
-                className="w-full p-3 rounded-lg transition-all duration-300 focus:outline-none focus:scale-[1.02]"
-                style={{
-                  background: "var(--color-bg)",
-                  border: "2px solid var(--color-secondary)",
-                  color: "var(--color-text)",
-                  boxShadow: "0 2px 4px rgba(var(--color-primary-rgb), 0.05)",
-                }}
-                onFocus={(e) => {
-                  e.target.style.borderColor = "var(--color-primary)";
-                  e.target.style.boxShadow =
-                    "0 0 0 4px rgba(var(--color-primary-rgb), 0.1)";
-                }}
-                onBlur={(e) => {
-                  e.target.style.borderColor = "var(--color-secondary)";
-                  e.target.style.boxShadow =
-                    "0 2px 4px rgba(var(--color-primary-rgb), 0.05)";
-                }}
-              />
-            </div>
-
-            {/* Experience Field */}
-            <div>
-              <label
-                className="flex items-center gap-2 text-sm mb-2 font-medium"
-                style={{ color: "var(--color-secondary)" }}
-              >
-                <FaUserCog />
-                Years of Experience
-              </label>
-              <input
-                type="number"
-                name="experience"
-                value={formData.experience}
-                onChange={handleInputChange}
-                placeholder="Enter years of experience"
-                min="0"
-                className="w-full p-3 rounded-lg transition-all duration-300 focus:outline-none focus:scale-[1.02]"
-                style={{
-                  background: "var(--color-bg)",
-                  border: `2px solid ${
-                    formErrors.experience ? "#ef4444" : "var(--color-secondary)"
-                  }`,
-                  color: "var(--color-text)",
-                  boxShadow: formErrors.experience
-                    ? "0 0 0 4px rgba(239, 68, 68, 0.1)"
-                    : "0 2px 4px rgba(var(--color-primary-rgb), 0.05)",
-                }}
-                onFocus={(e) => {
-                  e.target.style.borderColor = "var(--color-primary)";
-                  e.target.style.boxShadow =
-                    "0 0 0 4px rgba(var(--color-primary-rgb), 0.1)";
-                }}
-                onBlur={(e) => {
-                  e.target.style.borderColor = formErrors.experience
-                    ? "#ef4444"
-                    : "var(--color-secondary)";
-                  e.target.style.boxShadow = formErrors.experience
-                    ? "0 0 0 4px rgba(239, 68, 68, 0.1)"
-                    : "0 2px 4px rgba(var(--color-primary-rgb), 0.05)";
-                }}
-              />
-              {formErrors.experience && (
-                <p className="text-red-500 text-sm mt-1 flex items-center gap-1">
-                  <FaExclamationTriangle />
-                  {formErrors.experience}
-                </p>
-              )}
-            </div>
-          </div>
-
-          {/* Bio Field */}
-          <div>
-            <label
-              className="flex items-center gap-2 text-sm mb-2 font-medium"
-              style={{ color: "var(--color-secondary)" }}
-            >
-              <FaFileAlt />
-              Professional Bio
-            </label>
-            <textarea
-              name="bio"
-              value={formData.bio}
-              onChange={handleInputChange}
-              placeholder="Tell us about your professional background, expertise, and what makes you a great mentor..."
-              rows={5}
-              className="w-full p-3 rounded-lg transition-all duration-300 focus:outline-none focus:scale-[1.02] resize-none"
-              style={{
-                background: "var(--color-bg)",
-                border: "2px solid var(--color-secondary)",
-                color: "var(--color-text)",
-                boxShadow: "0 2px 4px rgba(var(--color-primary-rgb), 0.05)",
-              }}
-              onFocus={(e) => {
-                e.target.style.borderColor = "var(--color-primary)";
-                e.target.style.boxShadow =
-                  "0 0 0 4px rgba(var(--color-primary-rgb), 0.1)";
-              }}
-              onBlur={(e) => {
-                e.target.style.borderColor = "var(--color-secondary)";
-                e.target.style.boxShadow =
-                  "0 2px 4px rgba(var(--color-primary-rgb), 0.05)";
-              }}
-            />
-          </div>
-
-          {/* Character count for bio */}
-          <div className="text-right">
-            <span
-              className="text-xs"
-              style={{ color: "var(--color-secondary)" }}
-            >
-              {formData.bio.length}/500 characters
-            </span>
           </div>
 
           {/* Save Button (Mobile) */}

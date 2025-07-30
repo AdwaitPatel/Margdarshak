@@ -18,7 +18,10 @@ const userSchema = new mongoose.Schema(
         },
         password: {
             type: String,
-            required: [true, "Password is required"],
+            required: function () {
+                // Password is required only if user doesn't have googleId
+                return !this.googleId;
+            },
         },
         profilePicture: {
             type: String,
@@ -67,13 +70,18 @@ const userSchema = new mongoose.Schema(
 // preHook is used before saving the info in DB
 // encrypt the password before saving in DB
 userSchema.pre("save", async function (next) {
-    if (!this.isModified("password")) return next();
+    // Skip password hashing if password is not modified or if user has googleId
+    if (!this.isModified("password") || this.googleId) return next();
 
     this.password = await bcrypt.hash(this.password, 10);
     next();
 });
 
 userSchema.methods.isPasswordCorrect = async function (password) {
+    // If user signed up with Google, they don't have a traditional password
+    if (this.googleId && !this.password) {
+        return false;
+    }
     return bcrypt.compare(password, this.password);
 };
 

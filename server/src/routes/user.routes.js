@@ -10,19 +10,14 @@ const userRouter = Router();
 // only admin can access
 userRouter.use("/admin", verifyToken, authorizeRoles("admin"), adminRouter);
 
-// only admin and mentor can access
-userRouter.use(
-    "/mentor",
-    verifyToken,
-    authorizeRoles("admin", "mentor"),
-    mentorRouter
-);
+// only mentor can access
+userRouter.use("/mentor", verifyToken, authorizeRoles("mentor"), mentorRouter);
 
-// only admin and student can access
+// only student can access
 userRouter.use(
     "/student",
     verifyToken,
-    authorizeRoles("admin", "student"),
+    authorizeRoles("student"),
     studentRouter
 );
 

@@ -12,9 +12,6 @@ import api from "../../../api";
 
 // Import all mentor components
 import Dashboard from "./Dashboard";
-import Messages from "./Messages";
-import Calendar from "./Calendar";
-import InfoSession from "./InfoSession";
 import PersonalInfo from "./PersonalInfo";
 import LoginSecurity from "./LoginSecurity";
 
@@ -27,29 +24,6 @@ const sections = [
         icon: <FaUserTie />,
         label: "Dashboard",
         component: Dashboard,
-      },
-    ],
-  },
-  {
-    heading: "My Activities",
-    items: [
-      {
-        key: "messages",
-        icon: <FaEnvelope />,
-        label: "Messages",
-        component: Messages,
-      },
-      {
-        key: "calendar",
-        icon: <FaCalendarAlt />,
-        label: "Calendar",
-        component: Calendar,
-      },
-      {
-        key: "info-session",
-        icon: <FaComments />,
-        label: "Info Session",
-        component: InfoSession,
       },
     ],
   },

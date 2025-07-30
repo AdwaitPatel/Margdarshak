@@ -2,6 +2,22 @@ import jwt from "jsonwebtoken";
 import { User } from "../models/user.models.js";
 import bcrypt from "bcrypt";
 
+const generateTokens = (user) => {
+    const accessToken = jwt.sign(
+        { id: user._id, role: user.role },
+        process.env.JWT_SECRET,
+        { expiresIn: process.env.JWT_EXPIRY }
+    );
+
+    const refreshToken = jwt.sign(
+        { id: user._id },
+        process.env.REFRESH_TOKEN_SECRET || process.env.JWT_SECRET,
+        { expiresIn: "7d" }
+    );
+
+    return { accessToken, refreshToken };
+};
+
 const registerUser = async (req, res) => {
     try {
         const {
@@ -104,16 +120,24 @@ const loginUser = async (req, res) => {
             });
         }
 
-        const token = jwt.sign(
-            { id: existedUser._id, role: existedUser.role },
-            process.env.JWT_SECRET,
-            { expiresIn: process.env.JWT_EXPIRY }
-        );
+        const { accessToken, refreshToken } = generateTokens(existedUser);
+
+        // Update refresh token in database
+        existedUser.refreshToken = refreshToken;
+        await existedUser.save();
 
         res.status(200).json({
             success: true,
-            message: "User logged in succesfully",
-            token,
+            message: "User logged in successfully",
+            token: accessToken,
+            refreshToken,
+            user: {
+                id: existedUser._id,
+                fullName: existedUser.fullName,
+                email: existedUser.email,
+                role: existedUser.role,
+                profilePicture: existedUser.profilePicture,
+            },
         });
     } catch (error) {
         return res.status(500).json({
@@ -122,4 +146,110 @@ const loginUser = async (req, res) => {
     }
 };
 
-export { registerUser, loginUser };
+const googleCallback = async (req, res) => {
+    try {
+        // req.user is available from passport authentication
+        if (!req.user) {
+            return res.redirect(
+                `${process.env.CLIENT_URL || "http://localhost:5173"}/login?error=authentication_failed`
+            );
+        }
+
+        const { accessToken, refreshToken } = generateTokens(req.user);
+
+        // Update refresh token in database
+        req.user.refreshToken = refreshToken;
+        await req.user.save();
+
+        // Redirect to frontend with token
+        const redirectUrl = `${process.env.CLIENT_URL || "http://localhost:5173"}/auth/success?token=${accessToken}&refreshToken=${refreshToken}&user=${encodeURIComponent(
+            JSON.stringify({
+                id: req.user._id,
+                fullName: req.user.fullName,
+                email: req.user.email,
+                role: req.user.role,
+                profilePicture: req.user.profilePicture,
+            })
+        )}`;
+
+        res.redirect(redirectUrl);
+    } catch (error) {
+        console.error("Google callback error:", error);
+        res.redirect(
+            `${process.env.CLIENT_URL || "http://localhost:5173"}/login?error=callback_error`
+        );
+    }
+};
+
+const logoutUser = async (req, res) => {
+    try {
+        const userId = req.user?.id;
+
+        if (userId) {
+            // Clear refresh token from database
+            await User.findByIdAndUpdate(userId, {
+                $unset: { refreshToken: 1 },
+            });
+        }
+
+        res.status(200).json({
+            success: true,
+            message: "User logged out successfully",
+        });
+    } catch (error) {
+        console.error("Logout error:", error);
+        res.status(500).json({
+            message: "Something went wrong while logging out.",
+        });
+    }
+};
+
+const refreshAccessToken = async (req, res) => {
+    try {
+        const { refreshToken } = req.body;
+
+        if (!refreshToken) {
+            return res.status(401).json({
+                message: "Refresh token is required",
+            });
+        }
+
+        const decoded = jwt.verify(
+            refreshToken,
+            process.env.REFRESH_TOKEN_SECRET || process.env.JWT_SECRET
+        );
+        const user = await User.findById(decoded.id);
+
+        if (!user || user.refreshToken !== refreshToken) {
+            return res.status(401).json({
+                message: "Invalid refresh token",
+            });
+        }
+
+        const { accessToken, refreshToken: newRefreshToken } =
+            generateTokens(user);
+
+        // Update refresh token in database
+        user.refreshToken = newRefreshToken;
+        await user.save();
+
+        res.status(200).json({
+            success: true,
+            accessToken,
+            refreshToken: newRefreshToken,
+        });
+    } catch (error) {
+        console.error("Refresh token error:", error);
+        res.status(401).json({
+            message: "Invalid refresh token",
+        });
+    }
+};
+
+export {
+    registerUser,
+    loginUser,
+    googleCallback,
+    logoutUser,
+    refreshAccessToken,
+};

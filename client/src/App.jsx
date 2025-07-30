@@ -8,6 +8,7 @@ import CareerQuizPage from "./pages/CareerQuiz";
 import SignupPage from "./pages/Auth/Signup.jsx";
 import LoginPage from "./pages/Auth/Login.jsx";
 import ForgotPasswordPage from "./pages/Auth/ForgotPassword.jsx";
+import AuthSuccess from "./components/Auth/AuthSuccess.jsx";
 import CareerDomainsPage from "./pages/CareerDomains";
 import ScrollToTop from "./components/Common/ScrollToTop.jsx";
 import MentorsPage from "./pages/Mentors";
@@ -36,6 +37,7 @@ const App = () => {
           <Route path="/signup" element={<SignupPage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/forgot-password" element={<ForgotPasswordPage />} />
+          <Route path="/auth/success" element={<AuthSuccess />} />
           <Route path="/Mentors" element={<MentorsPage />} />
           <Route path="/about" element={<About />} />
           <Route path="/terms" element={<Terms />} />
